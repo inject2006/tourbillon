@@ -1,0 +1,47 @@
+{{#form_basic}}
+<div class="x_panel">
+    {{#panel_header}}
+    <div class="x_title">
+      <h2>{{title}}
+        <small>{{subtitle}}</small>
+      </h2>
+      <ul class="nav navbar-right panel_toolbox">
+        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+          <ul class="dropdown-menu" role="menu">
+            {{#settings}}
+            <li><a href="{{link}}">{{title}}</a>
+            </li>
+            {{/settings}}
+          </ul>
+        </li>
+        <li><a class="close-link"><i class="fa fa-close"></i></a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+    {{/panel_header}}
+    <div class="x_content">
+      <br>
+      <form class="form-horizontal form-label-left">
+        {{#form_data}}
+        {{> basic-input.mst}}
+
+        {{> basic-select.mst}}
+        {{/form_data}}
+        {{> basic-check.mst}}
+        <div class="ln_solid"></div>
+        <div class="form-group">
+          <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+            <button type="button" class="btn btn-primary">Cancel</button>
+            <button type="reset" class="btn btn-primary">Reset</button>
+            <button type="submit" class="btn btn-success">Submit</button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+  </div>
+{{/form_basic}}

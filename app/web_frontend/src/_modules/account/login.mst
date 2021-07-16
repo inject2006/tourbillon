@@ -1,0 +1,63 @@
+<html lang="en" class="gr__colorlib_com"><head>
+    {{> ../../_partials/header.mst}}
+</style>
+</head>
+  <body class="login" data-gr-c-s-loaded="true">
+    <div>
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form id="login_form">
+              <h1>登 录</h1>
+              {{#modules.login.data}}
+              <div>
+                <input type="{{type}}" class="form-control" placeholder="{{placeholder}}" name="{{name}}" required>
+              </div>
+              {{/modules.login.data}}
+              <div>
+                <button class="btn btn-success btn-block submit" id="login_btn">登 录</button>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">您未注册?
+                  <a href="{{& modules.register.page}}" class="to_register"> 创建账号 </a>
+                </p>
+                <div class="clearfix"></div>
+                <br>
+
+                <div>
+                  {{#site}}
+                  <h1><i class="zeus-logo"></i>{{name}}</h1>
+                  <p>{{copyright}}</p>
+                  {{/site}}
+                </div>
+              </div>
+            </form>
+            {{#modules.login}}
+            <script>
+                var login_button_id = '#login_btn';
+                var loginData = DataUtil.getFormData('login_form');
+                $(login_button_id).click(function(){
+                  DataService.post({
+                    url: '{{& api_url}}',
+                    data: DataUtil.getFormData('login_form')
+                  },function(resp){
+                    AuthService.setAuth(resp.token, resp.username, resp.expired);
+                    var redirect = '{{& success_redirect}}';
+                    window.location = redirect;
+                  },function(error){
+                    alert(error.responseJSON.msg);
+                  });
+                })
+
+                $("#login_form").submit(function(e){e.preventDefault();});
+            </script>
+            {{/modules.login}}
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>

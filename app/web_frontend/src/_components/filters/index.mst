@@ -1,0 +1,6 @@
+{{#condition}}
+  {{> ./condition.mst}}
+{{/condition}}
+{{#search}}
+  {{> ./search.mst}}
+{{/search}}

@@ -1,0 +1,59 @@
+<div class="row">
+  {{#filters}}
+    {{> filters/index.mst}}
+  {{/filters}}
+</div>
+<div class="row">
+  {{#components}}
+  <div class="col-md-{{width}} col-xs-12" data-domtype="component">
+    <div class="x_panel">
+        <div class="x_title">
+          <h2>{{title}}
+            <small>{{subtitle}}</small>
+          </h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li><a class="refresh-link"><i class="fa fa-refresh"></i></a>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          {{#form}}
+            {{> form/form.mst}}
+          {{/form}}
+          {{#table}}
+            {{> table/table.mst}}
+          {{/table}}
+          {{#chart}}
+            {{> chart/chart.mst}}
+          {{/chart}}
+          {{#cards}}
+            {{> widgets/card.mst}}
+          {{/cards}}
+          {{#tabs}}
+            {{> widgets/tab.mst}}
+          {{/tabs}}
+          {{#chtml}}
+            {{> widgets/chtml.mst}}
+          {{/chtml}}
+          {{#expressos}}
+            <div class="top_tiles" style="margin: 10px 0;">
+              {{> widgets/expresso.mst}}
+            </div>
+          {{/expressos}}
+          {{#stickers}}
+            {{> widgets/sticker.mst}}
+          {{/stickers}}
+          {{#rank}}
+            {{> widgets/rank.mst}}
+          {{/rank}}
+          <br>
+        </div>
+      </div>
+  </div>
+  {{/components}}
+</div>

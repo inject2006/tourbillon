@@ -1,0 +1,127 @@
+{
+  "example_chart_line": {
+    "page": {
+      "title": "Line Chart Example - 通过 layout 构建",
+      "subtitle": ""
+    },
+    "filters": {
+       "condition": {
+         "title":"条件",
+         "id": "example_filter",
+         "data": [
+           {
+             "date": {
+               "label": "开始时间",
+               "name": "startitme",
+               "format": "YYYY-MM-DD HH:mm:ss"
+             }
+           },
+           {
+             "date": {
+               "label": "结束时间",
+               "name": "endtime",
+               "format": "YYYY-MM-DD HH:mm:ss"
+             }
+           },
+           {
+             "input":{
+               "label": "关键字",
+               "name": "key",
+               "type": "text"
+             }
+           }
+         ]
+       }
+    },
+    "components": [
+      {
+        "title":"单数据",
+        "subtitle": "",
+        "width": "6",
+        "chart": {
+          "type": "line",
+          "id": "example_chart_line",
+          "api_url": "/data/example_chart_line/single"
+        }
+      },
+      {
+        "title":"单数据填充",
+        "subtitle": "",
+        "width": "6",
+        "chart": {
+          "type": "line",
+          "id": "example_chart_line_f",
+          "fill": true,
+          "api_url": "/data/example_chart_line/single"
+        }
+      },
+      {
+        "title":"多数据",
+        "subtitle": "",
+        "width": "6",
+        "chart": {
+          "type": "line",
+          "id": "example_chart_line_m",
+          "api_url": "/data/example_chart_line/multiple"
+        }
+      },
+      {
+        "title":"多数据填充",
+        "subtitle": "",
+        "width": "6",
+        "chart": {
+          "type": "line",
+          "id": "example_chart_line_m_fill",
+          "fill": true,
+          "api_url": "/data/example_chart_line/multiple"
+        }
+      }
+    ]
+  },
+  "example_chart_bar": {
+    "page": {
+      "title": "Bar Chart Example - 通过 layout 构建",
+      "subtitle": ""
+    },
+    "components": [
+      {
+        "title":"柱形图",
+        "subtitle": "",
+        "width": "12",
+        "chart": {
+          "type": "bar",
+          "id": "example_chart_bar",
+          "api_url": "/data/example_chart_bar"
+        }
+      }
+    ]
+  },
+  "example_chart_pie": {
+    "page": {
+      "title": "Pie Chart Example - 通过 layout 构建",
+      "subtitle": ""
+    },
+    "components": [
+      {
+        "title":"饼图-pie",
+        "subtitle": "",
+        "width": "6",
+        "chart": {
+          "type": "pie",
+          "id": "example_chart_pie",
+          "api_url": "/data/example_chart_pie"
+        }
+      },
+      {
+        "title":"饼图-doughnut",
+        "subtitle": "",
+        "width": "6",
+        "chart": {
+          "type": "doughnut",
+          "id": "example_chart_doughnut",
+          "api_url": "/data/example_chart_pie"
+        }
+      }
+    ]
+  }
+}

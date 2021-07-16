@@ -1,0 +1,102 @@
+ <style>
+ .text-with-hr {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+/*
+横线，并通过z-index：-1将or附近的横线遮盖住
+*/
+.text-with-hr:before {
+    position: absolute;
+    content: '';
+    top: 25px;
+    left: 0px;
+    width: 100%;
+    border-bottom: 1px solid #003300;
+    z-index: -1;
+}
+.text-with-hr span {
+    display: inline-block;
+    background: white;
+    padding: 10px;
+    font-size:18px;
+}
+
+#operation-product-type {
+    width: 300px;
+}
+
+#segments {
+    width: 1000px;
+}
+
+#routing-key {
+    width: 300px;
+}
+
+ </style>
+    <script>
+
+  DataService.get({
+        url: '/misc/sys_control/'
+      },function(resp){
+        new PNotify({
+            title: '加载成功!',
+            type: 'success'
+        });
+     Object.keys(obj).forEach(function(key){
+        console.log(key,obj[key]);
+        $('#myTab').append('<li><a href="#'+key+'" data-toggle="tab">'+key+'</a></li> ');
+        $('#myTabContent').append('<li><a href="#'+key+'" data-toggle="tab">'+key+'</a></li> ');
+     }
+
+      },function(error){
+        new PNotify({
+            title: '订票失败!',
+            text: error.responseText,
+            type: 'error'
+        });
+      })
+     </script>
+<form id="syscontrol-form" class="form-horizontal form-label-left" action="/sys_control/" method='POST'>
+      <ul id="myTab" class="nav nav-tabs">
+
+    </ul>
+<div id="myTabContent" class="tab-content">
+	<div class="tab-pane fade in active" id="home">
+		<p>xx</p>
+	</div>
+	<div class="tab-pane fade" id="ios">
+		<p>iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple
+			TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。</p>
+	</div>
+	<div class="tab-pane fade" id="ejb">
+		<p>Enterprise Java Beans（EJB）是一个创建高度可扩展性和强大企业级应用程序的开发架构，部署在兼容应用程序服务器（比如 JBOSS、Web Logic 等）的 J2EE 上。
+		</p>
+	</div>
+</div>
+</form>
+
+    <script>
+    var submit_id = '#manual-order-submit';
+    $(submit_id).click(function(){
+      var form_data = DataUtil.getFormData("syscontrol-form");
+      DataService.post({
+        url: '/misc/sys_control/',
+        data: form_data
+      },function(resp){
+        new PNotify({
+            title: '订票成功!',
+            type: 'success'
+        });
+      },function(error){
+        new PNotify({
+            title: '订票失败!',
+            text: error.responseText,
+            type: 'error'
+        });
+      })
+    });
+
+    </script>

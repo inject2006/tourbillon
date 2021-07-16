@@ -1,0 +1,6 @@
+<div class="form-group">
+  <label class="control-label col-md-3 col-sm-3 col-xs-12">{{label}}</label>
+  <div class="col-md-9 col-sm-12">
+    <input type="{{type}}" name="{{name}}" class="form-control"  data-type="input" placeholder="{{placeholder}}" {{#readonly}}readonly{{/readonly}}>
+  </div>
+</div>

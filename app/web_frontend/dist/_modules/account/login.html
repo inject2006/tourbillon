@@ -1,0 +1,148 @@
+<html lang="en" class="gr__colorlib_com"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8" >
+<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+<meta name="viewport" content="width=device-width, initial-scale=1" >
+<title >Tourbillon - 陀飞轮机票管理系统</title >
+
+<script>
+    window.zeusServerHost = 'http://misc.tourbillon.qisec.cn:9801';  
+</script>
+<!-- jQuery -->
+<script src="/vendors/gentelella/jquery.js" ></script>
+<script src="/vendors/js/data-service.js" ></script>
+<script src="/vendors/js/auth-service.js" ></script>
+<script src="/vendors/js/data-util.js" ></script>
+<script src="/vendors/js/chart-util.js" ></script>
+<script src="/vendors/js/mustache.min.js" ></script>
+<script src="/vendors/gentelella/Chart.min.js" ></script>
+<script src="/vendors/js/jquery.sparkline.min.js" ></script>
+<script src="/vendors/js/palette.js" ></script>
+<script src="/vendors/js/data-listener.js" ></script>
+<!-- Bootstrap -->
+<link href="/vendors/gentelella/bootstrap.min.css" rel="stylesheet" >
+<!-- Font Awesome -->
+<link href="/vendors/font-awesome/font-awesome.min.css" rel="stylesheet" >
+<!-- iCheck -->
+<link href="/vendors/gentelella/flat/green.css" rel="stylesheet" >
+<!-- Select2 -->
+<link href="/vendors/gentelella/select2.min.css" rel="stylesheet" >
+<!-- Switchery -->
+<link href="/vendors/gentelella/switchery.css" rel="stylesheet" >
+<!-- bootstrap-daterangepicker -->
+<link href="/vendors/gentelella/daterangepicker.css" rel="stylesheet" >
+<link href="/vendors/gentelella/jquery.tagsinput.min.css" rel="stylesheet" >
+<link href="/vendors/pnotify.css" rel="stylesheet" >
+<link href="/vendors/pnotify.buttons.css" rel="stylesheet" >
+<link href="/vendors/pnotify.nonblock.css" rel="stylesheet" >
+<!-- gentelella -->
+<link href="/vendors/gentelella/custom.min.css" rel="stylesheet" >
+<!-- Datatables Editor -->
+<link href="/vendors/dataTables.editor/jquery.dataTables.min.css" rel="stylesheet" >
+<link href="/vendors/dataTables.editor/editor.dataTables.min.css" rel="stylesheet" >
+<link href="/vendors/dataTables.editor/buttons.dataTables.min.css" rel="stylesheet" >
+<link href="/vendors/dataTables.editor/select.dataTables.min.css" rel="stylesheet" >
+
+<link href="/vendors/style/zeus.css" rel="stylesheet" >
+<script>
+(function(window){
+  var authEnable = 'true' === 'true';
+
+  if (authEnable) {
+    var authObject = AuthService.getAuth();
+    var token = authObject.token;
+    var expired = authObject.expired;
+    var loginPage = '/_modules/account/login.html';
+    var registerPage = '/_modules/account/register.html';
+    var currentPage = window.location.pathname;
+    //新用户
+    if (!token || !expired) {
+      // 如果不是登录或者注册页面
+      if (! (currentPage === loginPage ||
+          currentPage === registerPage) ) {
+        window.location = loginPage
+      }
+    //老用户
+    } else {
+      //如果权限没有过期
+      if ((new Date().getTime()) < Number(expired)) {
+        DataService.get({
+         url: '/misc/verify/' + token
+       },function(resp){
+         if (!resp.authorized) {
+           window.location = '/_modules/account/login.html'
+         } else {
+
+         }
+       })
+      //如果权限过期
+      } else {
+        if (! (currentPage === loginPage ||
+            currentPage === registerPage) ) {
+          window.location = loginPage
+        }
+      }
+    }
+  }
+})(window)
+
+</script>
+</style>
+</head>
+  <body class="login" data-gr-c-s-loaded="true">
+    <div>
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+            <form id="login_form">
+              <h1>登 录</h1>
+              <div>
+                <input type="text" class="form-control" placeholder="用户名" name="username" required>
+              </div>
+              <div>
+                <input type="password" class="form-control" placeholder="密码" name="password" required>
+              </div>
+              <div>
+                <button class="btn btn-success btn-block submit" id="login_btn">登 录</button>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">您未注册?
+                  <a href="/_modules/account/register.html" class="to_register"> 创建账号 </a>
+                </p>
+                <div class="clearfix"></div>
+                <br>
+
+                <div>
+                  <h1><i class="zeus-logo"></i>Tourbillon</h1>
+                  <p>©2018 All Rights Reserved.</p>
+                </div>
+              </div>
+            </form>
+            <script>
+                var login_button_id = '#login_btn';
+                var loginData = DataUtil.getFormData('login_form');
+                $(login_button_id).click(function(){
+                  DataService.post({
+                    url: '/misc/login',
+                    data: DataUtil.getFormData('login_form')
+                  },function(resp){
+                    AuthService.setAuth(resp.token, resp.username, resp.expired);
+                    var redirect = '/example/table/flight-order-table.html';
+                    window.location = redirect;
+                  },function(error){
+                    alert(error.responseJSON.msg);
+                  });
+                })
+
+                $("#login_form").submit(function(e){e.preventDefault();});
+            </script>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>

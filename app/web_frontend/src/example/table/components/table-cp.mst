@@ -1,0 +1,27 @@
+<div class="x_panel">
+  {{#panel_header}}
+  {{> ../../../_partials/panel-header.mst}}
+  {{/panel_header}}
+  <div class="x_content" style="display: block;">
+    <table id="{{table_id}}" class="{{table_class}} ">
+      <thead>
+        <tr>
+          <th>#</th>
+          {{#table_headers}}
+          <th>{{.}}</th>
+          {{/table_headers}}
+        </tr>
+      </thead>
+      <tbody>
+        {{#table_body}}
+        <tr>
+          <th scope="row">{{sn}}</th>
+          {{#data}}
+          <td>{{.}}</td>
+          {{/data}}
+        </tr>
+        {{/table_body}}
+      </tbody>
+    </table>
+  </div>
+</div>

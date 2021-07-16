@@ -1,0 +1,3 @@
+{{#example_chart_pie}}
+  {{> ../../_layout/page.mst}}
+{{/example_chart_pie}}

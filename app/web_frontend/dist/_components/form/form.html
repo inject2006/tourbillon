@@ -1,0 +1,86 @@
+<form class="form- form-label-left" id="">
+  <div class="ln_solid"></div>
+  <div class="form-group">
+    <div class="col-md-9 col-sm-9 col-xs-12 col-md-offset-3">
+      <button type="button" class="btn btn-primary" id="_reset">重置</button>
+      <button type="button" class="btn btn-success" id="_submit">保存</button>
+    </div>
+  </div>
+</form>
+<script>
+  (function(window){
+
+    function fetchData(params) {
+      DataService.get({
+        url: '',
+        data: params
+      },function(resp){
+        var keys = Object.keys(resp['data']);
+        keys.forEach(function(key){
+          var value = resp['data'][key];
+          var input = $('#').find('input[name='+ key + ']');
+          var types = {
+            "input": input.data("type") === "input",
+            "checkbox": input.data("type") === "checkbox",
+            "radio": input.data("type") === "radio",
+            "date": input.data("type") === "date"
+          }
+          if (types.radio) {
+            $('#').find('input[name='+ key + '][value='+ value +']').prop("checked",true);
+          } else  if (types.checkbox) {
+            input.prop("checked",true);
+          } else if (types.date) {
+            var formatString = input.data("format") || "YYYY-MM-DD HH:mm";
+            input.val(moment(value).format(formatString));
+          } else if (types.input){
+            input.val(value);
+          }
+
+          var select = $('#').find('select[name='+ key + ']');
+          if ( select.length === 1 ) {
+            var options = resp['options'][key];
+            options.forEach(function(item, index){
+              var opt = document.createElement("option");
+              opt.value = item.value;
+              opt.innerHTML = item.label;
+              select.append(opt);
+            })
+            select.find('option[value='+ value +']').prop('selected',true);
+          }
+        })
+      });
+    }
+    $(document).ready(function(){
+      fetchData();
+      DataListener.addDataFunction("",fetchData);
+    });
+
+    var submit_id = '#_submit';
+    $(submit_id).click(function(){
+      var form_data = DataUtil.getFormData("");
+      DataService.post({
+        url: '',
+        data: form_data
+      },function(resp){
+        new PNotify({
+            title: '保存成功!',
+            type: 'success'
+        });
+      },function(error){
+        new PNotify({
+            title: '保存失败!',
+            text: error.statusText,
+            type: 'error'
+        });
+      })
+    });
+
+    var reset_id = '#_reset';
+    $(reset_id).click(function(){
+      fetchData();
+    });
+
+    $("#").submit(function(e){e.preventDefault();});
+  })(window)
+
+</script>

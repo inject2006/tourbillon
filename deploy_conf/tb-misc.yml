@@ -1,0 +1,217 @@
+version: "2"
+
+services:
+  crawler_manager:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: crawler_manager
+    ports:
+      - 8180:8180
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-misc
+    volumes:
+      - $PWD:/projects/tourbillon
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t crawler_manager crawler_manager
+
+  order_manager:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: order_manager
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-misc
+    volumes:
+      - $PWD:/projects/tourbillon
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t order_manager order_manager
+
+  sub_order_task:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: sub_order_task
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-misc
+    volumes:
+    - $PWD:/projects/tourbillon
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t sub_order_task sub_order_task 3 30
+
+  flight_order_task:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: flight_order_task
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-misc
+    volumes:
+    - $PWD:/projects/tourbillon
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t flight_order_task flight_order_task 3 5
+
+  check_ota_order_status_task:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: check_ota_order_status_task
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-misc
+    volumes:
+    - $PWD:/projects/tourbillon
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t check_ota_order_status_task check_ota_order_status_task 3 5
+
+  web_api:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: web_api
+    ports:
+      - 9801:9801
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-misc
+    volumes:
+      - $PWD:/projects/tourbillon
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: gunicorn 'run:create_app(tb_app_name="web_api")' --bind 0.0.0.0:9801 -w 8 -k gevent   --max-requests 1000
+
+  provider_api:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: provider_api
+    ports:
+      - 9501:9501
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-misc
+    volumes:
+      - $PWD:/projects/tourbillon
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: gunicorn 'run:create_app(tb_app_name="provider_api")' --bind 0.0.0.0:9501 -w 8 -k gevent   --max-requests 1000
+
+  alipay:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: alipay
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-misc
+    volumes:
+      - $PWD:/projects/tourbillon
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t alipay alipay
+
+  lowprice_stabilizer:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: lowprice_stabilizer
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-misc
+    volumes:
+      - $PWD:/projects/tourbillon
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t lowprice_stabilizer lowprice_stabilizer 1 1
+  flight_ota_fare_task:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: flight_ota_fare_task
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-misc
+    volumes:
+    - $PWD:/projects/tourbillon
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t flight_ota_fare_task flight_ota_fare_task 5 15
+#  provider_session_manager:
+#    image: 139.219.133.175:5000/tourbillon:v1.2.4
+#    container_name: provider_session_manager
+#    environment:
+#      env_mode: prod
+#      HOSTNAME: tb-misc
+#    volumes:
+#      - $PWD:/projects/tourbillon
+#      - /etc/localtime:/etc/localtime:ro
+#      - /etc/resolv.conf:/etc/resolv.conf
+#    restart: always
+#    privileged: true
+#    working_dir: /projects/tourbillon
+#    command: python run.py -t provider_session_manager provider_session_manager
+
+    ## DEPLOYMENT
+
+#    1. docker pull nginx:1.12-alpine
+#    2. docker run -d \
+#           --restart=always \
+#           --name nginx-devops-gui \
+#           --net='host' \
+#           -v /etc/localtime:/etc/localtime:ro \
+#           -e "LANG=en_US.UTF-8" \
+#           -v $PWD/bigsec_config:/opt/devops_gui \
+#           -v $PWD/nginx.conf:/etc/nginx/conf.d/default.conf \
+#           nginx:1.12-alpine
+
+
+  web_frontend:
+    image: nginx:1.12-alpine
+    container_name: web_frontend
+    ports:
+      - 9802:9802
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-misc
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - $PWD/app/web_frontend/dist:/projects/tourbillon/app/web_frontend/dist
+      - $PWD/app/web_frontend/nginx.conf:/etc/nginx/conf.d/default.conf
+      - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+
+  misc_task:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: misc_task
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-misc
+    volumes:
+      - $PWD:/projects/tourbillon
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t misc_task misc_task

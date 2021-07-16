@@ -1,0 +1,3 @@
+{{#layout_form}}
+  {{> ../../_layout/page.mst}}
+{{/layout_form}}

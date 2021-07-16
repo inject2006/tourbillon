@@ -1,0 +1,7 @@
+密钥：A64K9GE72VBY8NUD
+cid：tuniu_
+询价： http://ota.tourbillon.qisec.cn:9001/ota/search?__name=ctrip&__token=94jenqd7upk5b0va
+验价： http://ota.tourbillon.qisec.cn:9001/ota/verify?__name=ctrip&__token=94jenqd7upk5b0va
+下单： http://ota.tourbillon.qisec.cn:9001/ota/order?__name=ctrip&__token=94jenqd7upk5b0va
+通知出票、支付取消接口： http://ota.tourbillon.qisec.cn:9001/ota/notice_issue?__name=ctrip&__token=94jenqd7upk5b0va
+票号查询接口： http://ota.tourbillon.qisec.cn:9001/ota/order_detail?__name=ctrip&__token=94jenqd7upk5b0va

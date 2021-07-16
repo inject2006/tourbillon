@@ -1,0 +1,45 @@
+{
+  "menu":[
+    {
+      "name": "订单管理",
+      "icon": "table",
+      "pages": [
+          {
+            "name":"主订单列表",
+            "link":"/example/table/flight-order-table.html"
+          },
+          {
+            "name":"子订单列表",
+            "link":"/example/table/sub-order-table.html"
+          },
+          {
+            "name":"机票搜索",
+            "link":"/example/table/manual-search-flight-table.html"
+          },
+            {
+            "name":"收支明细",
+            "link":"/example/table/income-expense-detail-table.html"
+          }
+      ]
+    },
+        {
+      "name": "系统配置",
+      "icon": "table",
+      "pages": [
+          {
+            "name":"系统配置",
+            "link":"/example/form/layout-form.html"
+          },
+          {
+            "name":"New系统配置",
+            "link":"/_modules/syscontrol/syscontrol.html"
+          },
+              {
+            "name":"熔断黑名单",
+            "link":"/example/table/fusing-repo-table.html"
+          }
+      ]
+    }
+
+  ]
+}

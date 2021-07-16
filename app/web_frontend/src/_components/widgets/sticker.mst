@@ -1,0 +1,24 @@
+<div class="col-md-3 col-sm-6 col-xs-12">
+  <a href="{{link}}" target="_blank">
+    <div class="zeus-sticker">
+      <div class="icon">
+        <i class="fa fa-{{icon}}"></i>
+      </div>
+      <div class="content">
+        <div class="title-link">
+          <div class="title">
+            {{title}}
+          </div>
+          <div class="link">
+            {{link}}
+          </div>
+        </div>
+        <div class="tag">
+          {{#tags}}
+            <span class="label lable-{{type}}">{{label}}</span>
+          {{/tags}}
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

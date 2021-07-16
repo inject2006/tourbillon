@@ -1,0 +1,33 @@
+version: "2"
+
+services:
+  ota_api:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: ota_api
+    ports:
+      - 9001:9001
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-verify-2
+    volumes:
+      - $PWD:/projects/tourbillon
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: gunicorn 'run:create_app(tb_app_name="ota_api")' --bind 0.0.0.0:9001 -w 8 -k gevent  --max-requests 80000
+  flight_ota_fare_task:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: flight_ota_fare_task
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-verify-2
+    volumes:
+    - $PWD:/projects/tourbillon
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t flight_ota_fare_task flight_ota_fare_task 5 15

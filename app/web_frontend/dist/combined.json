@@ -1,0 +1,1156 @@
+{
+	"menu": [
+		{
+			"name": "订单管理",
+			"icon": "table",
+			"pages": [
+				{
+					"name": "主订单列表",
+					"link": "/example/table/flight-order-table.html"
+				},
+				{
+					"name": "子订单列表",
+					"link": "/example/table/sub-order-table.html"
+				},
+				{
+					"name": "机票搜索",
+					"link": "/example/table/manual-search-flight-table.html"
+				},
+				{
+					"name": "收支明细",
+					"link": "/example/table/income-expense-detail-table.html"
+				}
+			]
+		},
+		{
+			"name": "系统配置",
+			"icon": "table",
+			"pages": [
+				{
+					"name": "系统配置",
+					"link": "/example/form/layout-form.html"
+				},
+				{
+					"name": "New系统配置",
+					"link": "/_modules/syscontrol/syscontrol.html"
+				},
+				{
+					"name": "熔断黑名单",
+					"link": "/example/table/fusing-repo-table.html"
+				}
+			]
+		}
+	],
+	"modules": {
+		"config": {
+			"include": false,
+			"extends": [
+				{
+					"name": "高级配置",
+					"link": "/modules-ext/config/config-advanced.html"
+				}
+			],
+			"page": {
+				"title": "基础配置",
+				"subtitle": ""
+			},
+			"components": [
+				{
+					"title": "基本表单",
+					"subtitle": "包括数据拉取和提交功能的表单",
+					"width": "6",
+					"form": {
+						"id": "example_form",
+						"direction": "horizontal",
+						"api_url": "/data/example_form",
+						"data": [
+							{
+								"input": {
+									"name": "username",
+									"label": "用户名",
+									"type": "text"
+								}
+							},
+							{
+								"input": {
+									"label": "邮箱",
+									"name": "email",
+									"type": "email"
+								}
+							},
+							{
+								"input": {
+									"label": "密码",
+									"name": "pwd",
+									"type": "password"
+								}
+							},
+							{
+								"switch": {
+									"label": "是否记住",
+									"name": "remember",
+									"type": "checkbox"
+								}
+							}
+						]
+					}
+				},
+				{
+					"title": "高级表单",
+					"subtitle": "",
+					"width": "6",
+					"form": {
+						"id": "example_form_1",
+						"direction": "horizontal",
+						"api_url": "/data/example_form_ext",
+						"data": [
+							{
+								"input": {
+									"name": "username",
+									"label": "用户名",
+									"type": "text"
+								}
+							},
+							{
+								"input": {
+									"label": "邮箱",
+									"name": "email",
+									"type": "email"
+								}
+							},
+							{
+								"input": {
+									"label": "密码",
+									"name": "pwd",
+									"type": "password"
+								}
+							},
+							{
+								"switch": {
+									"label": "是否记住",
+									"name": "remember",
+									"type": "checkbox"
+								}
+							},
+							{
+								"switch": {
+									"label": "男",
+									"name": "gender",
+									"type": "radio",
+									"value": "m"
+								}
+							},
+							{
+								"switch": {
+									"label": "女",
+									"name": "gender",
+									"type": "radio",
+									"value": "f"
+								}
+							},
+							{
+								"date": {
+									"label": "开始",
+									"name": "start",
+									"format": "YYYY-MM-DD"
+								}
+							},
+							{
+								"select": {
+									"label": "国家",
+									"name": "country",
+									"options": [
+										{
+											"value": "cn",
+											"label": "中国"
+										},
+										{
+											"value": "us",
+											"label": "美国"
+										},
+										{
+											"value": "jp",
+											"label": "日本"
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		},
+		"help": {
+			"include": false
+		},
+		"auth": {
+			"enable": true,
+			"api_url": "/misc/verify"
+		},
+		"login": {
+			"api_url": "/misc/login",
+			"page": "/_modules/account/login.html",
+			"data": [
+				{
+					"name": "username",
+					"type": "text",
+					"placeholder": "用户名"
+				},
+				{
+					"name": "password",
+					"type": "password",
+					"placeholder": "密码"
+				}
+			],
+			"success_redirect": "/example/table/flight-order-table.html"
+		},
+		"register": {
+			"api_url": "/account/register",
+			"page": "/_modules/account/register.html",
+			"data": [
+				{
+					"name": "username",
+					"type": "text",
+					"placeholder": "用户名"
+				},
+				{
+					"name": "email",
+					"type": "email",
+					"placeholder": "邮箱"
+				},
+				{
+					"name": "password",
+					"type": "password",
+					"placeholder": "密码"
+				}
+			],
+			"success_redirect": "/index.html"
+		},
+		"dashboard": {
+			"page": {
+				"title": "总览",
+				"subtitle": ""
+			},
+			"components": []
+		},
+		"manual": {
+			"page": {
+				"title": "人工订票页面",
+				"subtitle": "。"
+			},
+			"components": [
+				{
+					"title": "",
+					"subtitle": "",
+					"width": "12",
+					"chtml": {
+						"api_url": "/misc/flight_order_manage/",
+						"title": "基础表单111",
+						"page": "/_modules/manual/order-form.html"
+					}
+				}
+			]
+		},
+		"syscontrol": {
+			"page": {
+				"title": "配置页面",
+				"subtitle": "。"
+			},
+			"components": [
+				{
+					"title": "",
+					"subtitle": "",
+					"width": "12",
+					"chtml": {
+						"api_url": "/misc/sys_control/",
+						"title": "基础表单111",
+						"page": "/_modules/syscontrol/syscontrol-form.html"
+					}
+				}
+			]
+		}
+	},
+	"site": {
+		"name": "Tourbillon",
+		"title": "Tourbillon - 陀飞轮机票管理系统",
+		"copyright": "©2018 All Rights Reserved."
+	},
+	"server": {
+		"host": "http://misc.tourbillon.qisec.cn:9801"
+	},
+	"example_chart_line": {
+		"page": {
+			"title": "Line Chart Example - 通过 layout 构建",
+			"subtitle": ""
+		},
+		"filters": {
+			"condition": {
+				"title": "条件",
+				"id": "example_filter",
+				"data": [
+					{
+						"date": {
+							"label": "开始时间",
+							"name": "startitme",
+							"format": "YYYY-MM-DD HH:mm:ss"
+						}
+					},
+					{
+						"date": {
+							"label": "结束时间",
+							"name": "endtime",
+							"format": "YYYY-MM-DD HH:mm:ss"
+						}
+					},
+					{
+						"input": {
+							"label": "关键字",
+							"name": "key",
+							"type": "text"
+						}
+					}
+				]
+			}
+		},
+		"components": [
+			{
+				"title": "单数据",
+				"subtitle": "",
+				"width": "6",
+				"chart": {
+					"type": "line",
+					"id": "example_chart_line",
+					"api_url": "/data/example_chart_line/single"
+				}
+			},
+			{
+				"title": "单数据填充",
+				"subtitle": "",
+				"width": "6",
+				"chart": {
+					"type": "line",
+					"id": "example_chart_line_f",
+					"fill": true,
+					"api_url": "/data/example_chart_line/single"
+				}
+			},
+			{
+				"title": "多数据",
+				"subtitle": "",
+				"width": "6",
+				"chart": {
+					"type": "line",
+					"id": "example_chart_line_m",
+					"api_url": "/data/example_chart_line/multiple"
+				}
+			},
+			{
+				"title": "多数据填充",
+				"subtitle": "",
+				"width": "6",
+				"chart": {
+					"type": "line",
+					"id": "example_chart_line_m_fill",
+					"fill": true,
+					"api_url": "/data/example_chart_line/multiple"
+				}
+			}
+		]
+	},
+	"example_chart_bar": {
+		"page": {
+			"title": "Bar Chart Example - 通过 layout 构建",
+			"subtitle": ""
+		},
+		"components": [
+			{
+				"title": "柱形图",
+				"subtitle": "",
+				"width": "12",
+				"chart": {
+					"type": "bar",
+					"id": "example_chart_bar",
+					"api_url": "/data/example_chart_bar"
+				}
+			}
+		]
+	},
+	"example_chart_pie": {
+		"page": {
+			"title": "Pie Chart Example - 通过 layout 构建",
+			"subtitle": ""
+		},
+		"components": [
+			{
+				"title": "饼图-pie",
+				"subtitle": "",
+				"width": "6",
+				"chart": {
+					"type": "pie",
+					"id": "example_chart_pie",
+					"api_url": "/data/example_chart_pie"
+				}
+			},
+			{
+				"title": "饼图-doughnut",
+				"subtitle": "",
+				"width": "6",
+				"chart": {
+					"type": "doughnut",
+					"id": "example_chart_doughnut",
+					"api_url": "/data/example_chart_pie"
+				}
+			}
+		]
+	},
+	"flight_order_table": {
+		"page": {
+			"title": "当前订单",
+			"subtitle": ""
+		},
+		"components": [
+			{
+				"title": "List",
+				"subtitle": "默认按照下单时间倒排，仅展示30天内的数据",
+				"width": "12",
+				"table": {
+					"editor": {
+						"id": "example_table_1",
+						"table_headers": [
+							"",
+							"ID",
+							"OTA下单时间",
+							"总处理时间",
+							"OTA",
+							"OTA订单号",
+							"OTA状态",
+							"是否已降舱",
+							"关联子订单号",
+							"供应商渠道",
+							"供应商状态",
+							"航班信息",
+							"乘机人",
+							"航段信息",
+							"供应商成本总价",
+							"OTA订单价",
+							"PNR大编",
+							"关联订单号",
+							"人工介入",
+							"测试订单",
+							"备注"
+						],
+						"table_columns": [
+							"fo",
+							"id",
+							"ota_create_order_time",
+							"process_duration",
+							"ota_name",
+							"ota_order_id",
+							"ota_order_status.label",
+							"is_cabin_changed.label",
+							"providers_assoc_id",
+							"provider_channel",
+							"providers_status.label",
+							"routing",
+							"passengers",
+							"segments",
+							"providers_total_price",
+							"ota_pay_price",
+							"pnr_code",
+							"assoc_order_id",
+							"is_manual.label",
+							"is_test_order.label",
+							"comment"
+						],
+						"page_length": 15,
+						"table_edit": [
+							{
+								"label": "供应商成本总价（该栏如果有值请勿随意修改）",
+								"name": "providers_total_price",
+								"type": "text"
+							},
+							{
+								"label": "PNR（该栏如果有值请勿随意修改）",
+								"name": "pnr_code",
+								"type": "text"
+							},
+							{
+								"label": "售出价格（该栏如果有值请勿随意修改）",
+								"name": "ota_pay_price",
+								"type": "text"
+							},
+							{
+								"label": "设置供应商状态",
+								"name": "providers_status.value",
+								"type": "select"
+							},
+							{
+								"label": "设置主订单状态（如果为人工订单，请不要修改状态）",
+								"name": "ota_order_status.value",
+								"type": "select"
+							},
+							{
+								"label": "备注",
+								"name": "comment",
+								"type": "text"
+							},
+							{
+								"label": "是否为测试订单",
+								"name": "is_test_order.value",
+								"type": "select"
+							},
+							{
+								"label": "如果需要替换某个主订单，请填写被替换订单数字ID",
+								"name": "replace_flight_order_id",
+								"type": "text"
+							}
+						],
+						"api_url": "/misc/flight_order_manage"
+					}
+				}
+			}
+		]
+	},
+	"sub_order_table": {
+		"page": {
+			"title": "当前订单",
+			"subtitle": ""
+		},
+		"components": [
+			{
+				"title": "List",
+				"subtitle": "默认按照下单时间倒排，仅展示30天内的数据",
+				"width": "12",
+				"table": {
+					"editor": {
+						"id": "sub_order_1",
+						"table_headers": [
+							"",
+							"ID",
+							"主订单ID",
+							"OTA订单ID",
+							"创建时间",
+							"处理时长",
+							"是否需要致电",
+							"变舱情况",
+							"供应商状态",
+							"航班信息",
+							"乘机人",
+							"航段信息",
+							"供应商成本价",
+							"PNR大编",
+							"供应商渠道",
+							"人工介入",
+							"备注"
+						],
+						"table_columns": [
+							"fo",
+							"id",
+							"flight_order_id",
+							"ota_order_id",
+							"create_time",
+							"process_duration",
+							"is_modified_card_no.label",
+							"cabin_status",
+							"provider_order_status.label",
+							"routing",
+							"passengers",
+							"segments",
+							"provider_price",
+							"pnr_code",
+							"provider_channel",
+							"is_manual.label",
+							"comment"
+						],
+						"page_length": 15,
+						"table_edit": [
+							{
+								"label": "关联账号（如果注册失败则需要人工注册后填写，该栏如果有值请勿随意修改）",
+								"name": "username",
+								"type": "text"
+							},
+							{
+								"label": "关联密码（如果注册失败则需要人工注册后填写，该栏如果有值请勿随意修改）",
+								"name": "password",
+								"type": "text"
+							},
+							{
+								"label": "供应商订单号（该栏如果有值请勿随意修改）",
+								"name": "provider_order_id",
+								"type": "text"
+							},
+							{
+								"label": "供应商成本价（该栏如果有值请勿随意修改）",
+								"name": "provider_price",
+								"type": "text"
+							},
+							{
+								"label": "PNR（该栏如果有值请勿随意修改）",
+								"name": "pnr_code",
+								"type": "text"
+							},
+							{
+								"label": "票号（填写规范：查看列表中乘机人ID，并将每个乘机人的票号跟ID相对应，填写多个票号请用；分割，参考格式：23:394-3321080183;48:1229887876312）",
+								"name": "ticket_nos",
+								"type": "text"
+							},
+							{
+								"label": "设置订单状态",
+								"name": "provider_order_status.value",
+								"type": "select"
+							},
+							{
+								"label": "备注",
+								"name": "comment",
+								"type": "text"
+							}
+						],
+						"api_url": "/misc/sub_order_manage"
+					}
+				}
+			}
+		]
+	},
+	"manual_search_flight_table": {
+		"page": {
+			"title": "机票搜索",
+			"subtitle": ""
+		},
+		"filters": {
+			"condition": {
+				"title": "搜索条件",
+				"subtitle": "时间格式：2018-09-01，出发机场和到达机场格式为IATA三字码",
+				"id": "example_form",
+				"btn_text": "查询",
+				"api_url": "/misc/manual_search_flight/",
+				"data": [
+					{
+						"input": {
+							"label": "出发日期",
+							"name": "from_date",
+							"type": "text"
+						}
+					},
+					{
+						"input": {
+							"label": "出发机场",
+							"name": "from_airport",
+							"type": "text"
+						}
+					},
+					{
+						"input": {
+							"label": "到达机场",
+							"name": "to_airport",
+							"type": "text"
+						}
+					},
+					{
+						"input": {
+							"label": "成年乘客人数",
+							"name": "adt_count",
+							"type": "text"
+						}
+					},
+					{
+						"input": {
+							"label": "儿童乘客人数",
+							"name": "chd_count",
+							"type": "text"
+						}
+					},
+					{
+						"select": {
+							"label": "供应商渠道",
+							"name": "provider_channel"
+						}
+					},
+					{
+						"input": {
+							"label": "返程日期",
+							"name": "ret_date",
+							"type": "text"
+						}
+					}
+				]
+			}
+		},
+		"components": [
+			{
+				"title": "航班搜索结果",
+				"subtitle": "舱位和舱等仅选第一个航段作为参考",
+				"width": "12",
+				"table": {
+					"editor": {
+						"id": "example_table_7",
+						"table_headers": [
+							"操作",
+							"供应商渠道",
+							"出发机场",
+							"到达机场",
+							"出发时间",
+							"舱位等级",
+							"舱位",
+							"座位数",
+							"航段详情",
+							"成人单价",
+							"成人折扣",
+							"成人税",
+							"儿童单价",
+							"儿童税",
+							"RoutingKey",
+							"返程时间"
+						],
+						"table_columns": [
+							"operation",
+							"provider_channel",
+							"from_airport",
+							"to_airport",
+							"from_date",
+							"cabin_grade",
+							"cabin",
+							"cabin_count",
+							"segments",
+							"adult_price",
+							"adult_price_discount",
+							"adult_tax",
+							"child_price",
+							"child_tax",
+							"routing_key",
+							"ret_date"
+						],
+						"page_length": 15,
+						"api_url": "/misc/manual_search_flight"
+					}
+				}
+			}
+		]
+	},
+	"income_expense_detail_table": {
+		"page": {
+			"title": "对账详情",
+			"subtitle": ""
+		},
+		"filters": {
+			"condition": {
+				"title": "搜索条件",
+				"subtitle": "日期格式 2018-08-13,如不填写默认展示30天内的账单",
+				"id": "example_form2",
+				"btn_text": "查询",
+				"api_url": "/misc/income_expense_detail/",
+				"data": [
+					{
+						"input": {
+							"label": "开始日期",
+							"name": "start_bill_date",
+							"type": "text"
+						}
+					},
+					{
+						"input": {
+							"label": "结束日期",
+							"name": "end_bill_date",
+							"type": "text"
+						}
+					},
+					{
+						"select": {
+							"label": "OTA",
+							"name": "ota_name"
+						}
+					},
+					{
+						"select": {
+							"label": "交易类型",
+							"name": "trade_type"
+						}
+					}
+				]
+			}
+		},
+		"components": [
+			{
+				"title": "List",
+				"subtitle": "默认按照下单时间倒排",
+				"width": "12",
+				"table": {
+					"editor": {
+						"id": "example_table_100",
+						"table_headers": [
+							"",
+							"OTA",
+							"供应商",
+							"供应商渠道",
+							"交易类型",
+							"交易子类型",
+							"主订单ID",
+							"子订单ID",
+							"OTA订单ID",
+							"交易金额",
+							"交易渠道",
+							"票号信息",
+							"支出源",
+							"收入源",
+							"交易结果",
+							"交易时间",
+							"交易备注"
+						],
+						"table_columns": [
+							"fo",
+							"ota_name",
+							"provider",
+							"provider_channel",
+							"trade_type.label",
+							"trade_sub_type.label",
+							"flight_order_id",
+							"sub_order_id",
+							"ota_order_id",
+							"pay_amount",
+							"pay_channel",
+							"pax_info",
+							"expense_source",
+							"income_source",
+							"pay_result.label",
+							"pay_time",
+							"comment"
+						],
+						"page_length": 30,
+						"api_url": "/misc/income_expense_detail"
+					}
+				}
+			}
+		]
+	},
+	"fusing_repo_table": {
+		"page": {
+			"title": "熔断库",
+			"subtitle": ""
+		},
+		"components": [
+			{
+				"title": "List",
+				"subtitle": "fp_key 格式  from_airport|dep_time|to_airport|arr_time|flight_number|cabin|provider",
+				"width": "12",
+				"table": {
+					"editor": {
+						"id": "example_table_200",
+						"table_headers": [
+							"",
+							"Key",
+							"来源/添加时间"
+						],
+						"table_columns": [
+							"fo",
+							"fusing_key",
+							"fusing_var"
+						],
+						"page_length": 30,
+						"api_url": "/misc/fusing_repo",
+						"table_create": [
+							{
+								"label": "熔断条目,",
+								"name": "fusing_var",
+								"type": "text"
+							},
+							{
+								"label": "熔断类型（可选：ota、fp_key、provider）",
+								"name": "fusing_type",
+								"type": "text"
+							}
+						]
+					}
+				}
+			}
+		]
+	},
+	"manual_order_form": {
+		"page": {
+			"title": "人工订票",
+			"subtitle": "。"
+		},
+		"components": [
+			{
+				"title": "表单",
+				"subtitle": "。",
+				"width": "8",
+				"form": {
+					"id": "manual_order_form",
+					"direction": "horizontal",
+					"api_url": "/misc/manual_order/",
+					"data": [
+						{
+							"input": {
+								"name": "name",
+								"label": "名字"
+							}
+						},
+						{
+							"select": {
+								"name": "gender.value",
+								"label": "性别"
+							}
+						}
+					],
+					"options": {
+						"gender": [
+							{
+								"value": "M",
+								"label": "男"
+							}
+						]
+					}
+				}
+			}
+		]
+	},
+	"layout_form": {
+		"page": {
+			"title": "运营配置管理",
+			"subtitle": ""
+		},
+		"components": [
+			{
+				"title": "Manage",
+				"subtitle": "",
+				"width": "12",
+				"form": {
+					"id": "example_form",
+					"direction": "horizontal",
+					"api_url": "/misc/sys_control/",
+					"data": [
+						{
+							"input": {
+								"name": "operation_config",
+								"label": "当前配置"
+							}
+						}
+					]
+				}
+			}
+		]
+	},
+	"example_widgets": {
+		"page": {
+			"title": "General Widgets Example - 通过 layout 构建",
+			"subtitle": ""
+		},
+		"components": [
+			{
+				"title": "card例子",
+				"subtitle": "",
+				"cards": [
+					{
+						"id": "card-1",
+						"icon": "check-square-o",
+						"width": 3,
+						"title": "风险数",
+						"desp": "",
+						"api_url": "/data/exmaple_widgets/card_1"
+					},
+					{
+						"id": "card-2",
+						"icon": "sort-amount-desc",
+						"width": 3,
+						"title": "风险数",
+						"desp": "",
+						"api_url": "/data/exmaple_widgets/card_2"
+					},
+					{
+						"id": "card-3",
+						"icon": "check-square-o",
+						"width": 3,
+						"title": "风险数",
+						"desp": "",
+						"api_url": "/data/exmaple_widgets/card_3"
+					},
+					{
+						"id": "card-4",
+						"icon": "check-square-o",
+						"width": 3,
+						"title": "风险数",
+						"desp": "",
+						"api_url": "/data/exmaple_widgets/card_4"
+					}
+				]
+			},
+			{
+				"title": "expresso例子",
+				"subtitle": "",
+				"expressos": [
+					{
+						"id": "expreeso-1",
+						"width": 3,
+						"title": "风险数",
+						"type": "line",
+						"api_url": "/data/exmaple_widgets/expresso_1"
+					},
+					{
+						"id": "expreeso-2",
+						"width": 3,
+						"title": "风险数",
+						"type": "bar",
+						"api_url": "/data/exmaple_widgets/expresso_2"
+					},
+					{
+						"id": "expreeso-31",
+						"width": 1,
+						"title": "风险数",
+						"type": "pie",
+						"api_url": "/data/exmaple_widgets/expresso_31"
+					},
+					{
+						"id": "expreeso-32",
+						"width": 1,
+						"title": "风险数",
+						"type": "pie",
+						"api_url": "/data/exmaple_widgets/expresso_32"
+					},
+					{
+						"id": "expreeso-33",
+						"width": 1,
+						"title": "风险数",
+						"type": "pie",
+						"api_url": "/data/exmaple_widgets/expresso_33"
+					},
+					{
+						"id": "expreeso-4",
+						"width": 3,
+						"title": "风险数",
+						"type": "line",
+						"dynamic": true,
+						"interval": 3000,
+						"api_url": "/data/exmaple_widgets/expresso_4"
+					}
+				]
+			},
+			{
+				"title": "Rank 例子",
+				"subtitle": "",
+				"width": "6",
+				"rank": {
+					"id": "risk_ranking",
+					"title": "",
+					"desp": "",
+					"top": 10,
+					"api_url": "/data/exmaple_widgets/rank_1"
+				}
+			},
+			{
+				"title": "Sticker 例子",
+				"subtitle": "",
+				"width": "12",
+				"stickers": [
+					{
+						"icon": "user",
+						"title": "测试连接",
+						"link": "http://www.baidu.com",
+						"tags": [
+							{
+								"label": "VPN",
+								"type": "success"
+							}
+						]
+					},
+					{
+						"icon": "address-book",
+						"title": "测试连接",
+						"link": "http://www.baidu.com",
+						"tags": [
+							{
+								"label": "VPN",
+								"type": "success"
+							}
+						]
+					}
+				]
+			}
+		]
+	},
+	"example_widgets_custom": {},
+	"modules_ext": {
+		"config": {
+			"page": {
+				"title": "基础配置",
+				"subtitle": ""
+			},
+			"components": [
+				{
+					"title": "高级表单",
+					"subtitle": "",
+					"width": "6",
+					"form": {
+						"id": "example_form_1",
+						"direction": "horizontal",
+						"api_url": "/data/example_form_ext",
+						"data": [
+							{
+								"input": {
+									"name": "username",
+									"label": "用户名",
+									"type": "text"
+								}
+							},
+							{
+								"input": {
+									"label": "邮箱",
+									"name": "email",
+									"type": "email"
+								}
+							},
+							{
+								"input": {
+									"label": "密码",
+									"name": "pwd",
+									"type": "password"
+								}
+							},
+							{
+								"switch": {
+									"label": "是否记住",
+									"name": "remember",
+									"type": "checkbox"
+								}
+							},
+							{
+								"switch": {
+									"label": "男",
+									"name": "gender",
+									"type": "radio",
+									"value": "m"
+								}
+							},
+							{
+								"switch": {
+									"label": "女",
+									"name": "gender",
+									"type": "radio",
+									"value": "f"
+								}
+							},
+							{
+								"select": {
+									"label": "国家",
+									"name": "country",
+									"options": [
+										{
+											"value": "cn",
+											"name": "中国"
+										},
+										{
+											"value": "us",
+											"name": "美国"
+										},
+										{
+											"value": "jp",
+											"name": "日本"
+										}
+									]
+								}
+							}
+						]
+					}
+				}
+			]
+		}
+	}
+}

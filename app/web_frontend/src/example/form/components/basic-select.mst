@@ -1,0 +1,56 @@
+{{#select}}
+<div class="form-group">
+  {{#select_basic}}
+  <label class="control-label col-md-3 col-sm-3 col-xs-12">{{title}}</label>
+  <div class="col-md-9 col-sm-9 col-xs-12">
+    <select class="form-control">
+      {{#options}}
+      <option value={{value}}>{{name}}</option>
+      {{/options}}
+    </select>
+  </div>
+  {{/select_basic}}
+</div>
+<div class="form-group">
+  {{#select_custom}}
+  <label class="control-label col-md-3 col-sm-3 col-xs-12">{{title}}</label>
+  <div class="col-md-9 col-sm-9 col-xs-12">
+    <select class="select2_single form-control" tabindex="-1">
+      <option></option>
+      {{#options}}
+      <option value="{{value}}">{{name}}</option>
+      {{/options}}
+    </select>
+  </div>
+  {{/select_custom}}
+</div>
+<div class="form-group">
+  {{#select_group}}
+  <label class="control-label col-md-3 col-sm-3 col-xs-12">{{title}}</label>
+  <div class="col-md-9 col-sm-9 col-xs-12">
+    <select class="select2_group form-control">
+      {{#groups}}
+      <optgroup label="{{name}}">
+        {{#options}}
+        <option value="{{vale}}">{{name}}</option>
+        {{/options}}
+      </optgroup>
+      {{/groups}}
+      </optgroup>
+    </select>
+  </div>
+  {{/select_group}}
+</div>
+<div class="form-group">
+  {{#select_multiple}}
+  <label class="control-label col-md-3 col-sm-3 col-xs-12">{{title}}</label>
+  <div class="col-md-9 col-sm-9 col-xs-12">
+    <select class="select2_multiple form-control" multiple="multiple">
+      {{#options}}
+      <option value="{{value}}">{{name}}</option>
+      {{/options}}
+    </select>
+  </div>
+  {{/select_multiple}}
+</div>
+{{/select}}

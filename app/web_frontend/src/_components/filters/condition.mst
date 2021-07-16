@@ -1,0 +1,85 @@
+<div class="col-md-12 col-xs-12" data-domtype="filter">
+  <div class="x_panel zeus-filter">
+    <div class="x_title">
+      <h2>{{title}}
+        <small>{{subtitle}}</small>
+      </h2>
+      <div class="clearfix"></div>
+    </div>
+      <div class="x_content">
+        <form class="form-horizontal form-label-left" id="{{id}}">
+          {{#data}}
+            <div class="col-md-4">
+            {{#input}}
+              {{> ../form/form-input.mst}}
+            {{/input}}
+            {{#switch}}
+              {{> ../form/form-switch.mst}}
+            {{/switch}}
+            {{#select}}
+              {{> ../form/form-select.mst}}
+            {{/select}}
+            {{#date}}
+              {{> ../form/form-date.mst}}
+            {{/date}}
+          </div>
+          {{/data}}
+          <div class="form-group">
+            <div class="col-md-1 col-xs-12 col-md-offset-11">
+              <button type="button" class="btn btn-success" id="{{id}}_refresh">{{btn_text}}</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+<script>
+$(document).ready(function(){
+  $("#{{id}}_refresh").click(function(){
+    var params =  DataUtil.getFormData("{{id}}");
+    DataListener.setGlobalParams(params);
+    DataListener.execDataFunction(null,params);
+  });
+
+  $("#{{id}}").submit(function(e){e.preventDefault();});
+
+  var url = '{{& api_url}}';
+  function fetchData() {
+    DataService.get({
+      url: url
+    },function(resp){
+      if(resp.data){
+        for(var key in resp.data){
+          var input = $("#{{id}}")[0][key];
+          if(input.type === "checkbox") {
+            input.checked = resp.data[key];
+          } else if(input.dataset && input.dataset.type === "date"){
+            input.value = moment(resp.data[key]).format(input.dataset.format);
+          } else {
+            if(resp.options && input.dataset && input.dataset.type === "select"){
+              var optionStr = '';
+              resp.options[key].forEach(function(item){
+                optionStr += ('<option value="' + item.value + '">' + item.label + '</option>')
+              });
+              $(input).html(optionStr);
+            }
+            input.value = resp.data[key];
+          }
+        }
+
+        $("#{{id}}_refresh").click();
+      }
+    },function(error){
+      new PNotify({
+        title: error.responseText || '初始化失败!',
+        text: error.statusText,
+        type: 'error'
+      });
+    });
+  }
+
+  if(url) {
+    fetchData();
+  }
+})
+</script>

@@ -1,0 +1,140 @@
+{
+  "example_widgets": {
+    "page": {
+      "title": "General Widgets Example - 通过 layout 构建",
+      "subtitle": ""
+    },
+    "components": [
+      {
+        "title":"card例子",
+        "subtitle": "",
+        "cards": [
+          {
+            "id": "card-1",
+            "icon":"check-square-o",
+            "width":3,
+            "title": "风险数",
+            "desp":"",
+            "api_url":"/data/exmaple_widgets/card_1"
+          },
+          {
+            "id": "card-2",
+            "icon":"sort-amount-desc",
+            "width":3,
+            "title": "风险数",
+            "desp":"",
+            "api_url":"/data/exmaple_widgets/card_2"
+          },
+          {
+            "id": "card-3",
+            "icon":"check-square-o",
+            "width":3,
+            "title": "风险数",
+            "desp":"",
+            "api_url":"/data/exmaple_widgets/card_3"
+          },
+          {
+            "id": "card-4",
+            "icon":"check-square-o",
+            "width":3,
+            "title": "风险数",
+            "desp":"",
+            "api_url":"/data/exmaple_widgets/card_4"
+          }
+        ]
+      },{
+        "title":"expresso例子",
+        "subtitle": "",
+        "expressos": [
+          {
+            "id": "expreeso-1",
+            "width":3,
+            "title": "风险数",
+            "type": "line",
+            "api_url":"/data/exmaple_widgets/expresso_1"
+          },
+          {
+            "id": "expreeso-2",
+            "width":3,
+            "title": "风险数",
+            "type": "bar",
+            "api_url":"/data/exmaple_widgets/expresso_2"
+          },
+          {
+            "id": "expreeso-31",
+            "width":1,
+            "title": "风险数",
+            "type": "pie",
+            "api_url":"/data/exmaple_widgets/expresso_31"
+          },
+          {
+            "id": "expreeso-32",
+            "width":1,
+            "title": "风险数",
+            "type": "pie",
+            "api_url":"/data/exmaple_widgets/expresso_32"
+          },
+          {
+            "id": "expreeso-33",
+            "width":1,
+            "title": "风险数",
+            "type": "pie",
+            "api_url":"/data/exmaple_widgets/expresso_33"
+          },
+          {
+            "id": "expreeso-4",
+            "width":3,
+            "title": "风险数",
+            "type": "line",
+            "dynamic": true,
+            "interval": 3000,
+            "api_url":"/data/exmaple_widgets/expresso_4"
+          }
+        ]
+      },{
+        "title":"Rank 例子",
+        "subtitle": "",
+        "width": "6",
+        "rank": {
+          "id": "risk_ranking",
+          "title": "",
+          "desp": "",
+          "top": 10,
+          "api_url": "/data/exmaple_widgets/rank_1"
+        }
+      },
+      {
+        "title":"Sticker 例子",
+        "subtitle": "",
+        "width": "12",
+        "stickers": [
+          {
+            "icon": "user",
+            "title": "测试连接",
+            "link": "http://www.baidu.com",
+            "tags": [
+              {
+                "label": "VPN",
+                "type": "success"
+              }
+            ]
+          },
+          {
+            "icon": "address-book",
+            "title": "测试连接",
+            "link": "http://www.baidu.com",
+            "tags": [
+              {
+                "label": "VPN",
+                "type": "success"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "example_widgets_custom": {
+
+  }
+}

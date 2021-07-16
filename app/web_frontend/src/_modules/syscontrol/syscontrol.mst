@@ -1,0 +1,3 @@
+{{#modules.syscontrol}}
+{{> ../../_layout/page.mst}}
+{{/modules.syscontrol}}

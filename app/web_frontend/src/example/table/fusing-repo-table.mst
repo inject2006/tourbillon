@@ -1,0 +1,3 @@
+{{#fusing_repo_table}}
+  {{> ../../_layout/page.mst}}
+{{/fusing_repo_table}}

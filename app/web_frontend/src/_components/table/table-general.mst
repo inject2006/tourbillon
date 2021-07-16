@@ -1,0 +1,32 @@
+<table id="{{id}}" class="table {{type}} ">
+  <thead>
+    <tr>
+      {{#table_headers}}
+      <th>{{.}}</th>
+      {{/table_headers}}
+    </tr>
+  </thead>
+  <tbody id="{{id}}_body">
+  </tbody>
+</table>
+<script>
+  (function(window){
+    var tableBodyTemplate = $('#{{id}}_tmpl').html();
+    var tableType = '{{type}}';
+
+    Mustache.parse(tableBodyTemplate);
+    $(document).ready(function(){
+      function fillData(params){
+        DataService.get({
+          url: '{{& api_url}}',
+          data: params
+        },function(data){
+          var rendered = Mustache.render(tableBodyTemplate,data);
+          $('#{{id}}_body').html(rendered);
+        });
+      }
+      fillData();
+      DataListener.addDataFunction("{{id}}",fillData);
+    });
+  })(window)
+</script>

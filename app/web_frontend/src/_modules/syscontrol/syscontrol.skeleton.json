@@ -1,0 +1,22 @@
+{
+  "modules": {
+    "syscontrol": {
+      "page": {
+        "title": "配置页面",
+        "subtitle": "。"
+      },
+      "components": [
+        {
+          "title":"",
+          "subtitle": "",
+          "width":"12",
+          "chtml": {
+                "api_url":"/misc/sys_control/",
+                "title": "基础表单111",
+                "page": "/_modules/syscontrol/syscontrol-form.html"
+          }
+        }
+      ]
+    }
+  }
+}

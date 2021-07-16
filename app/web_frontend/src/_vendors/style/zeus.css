@@ -1,0 +1,69 @@
+.left_col {
+  z-index: 1 !important;
+}
+.site_title i{
+  padding: 0px 15px;
+  text-align: center;
+  vertical-align: middle;
+  border-radius:0%;
+  border:0px;
+}
+.zeus-logo {
+  background-image: url(/vendors/images/favicon.png);
+  background-repeat: no-repeat;
+  width: 30;
+  height: 30px;
+  display: inline-block;
+  background-size: 30px;
+  vertical-align: middle;
+}
+.panel_toolbox {
+  min-width: 0px !important;
+}
+
+.zeus-sticker {
+  position: relative;
+  display: block;
+  margin-bottom: 10px;
+  border: 1px solid #E4E4E4;
+  -webkit-border-radius: 5px;
+  overflow: hidden;
+  padding: 5px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 5px;
+  -moz-background-clip: padding;
+  border-radius: 5px;
+  background-clip: padding-box;
+  background: #FFF;
+  transition: all 100ms ease-in-out;
+}
+.zeus-sticker:hover {
+  box-shadow: 1px 1px 10px #E4E4E4;
+}
+
+.zeus-sticker > div {
+  display: inline-block;
+}
+
+.zeus-sticker .icon {
+  font-size: 30px;
+  padding: 5px;
+  vertical-align: top;
+}
+
+.zeus-sticker .content .title {
+  font-size: 14px;
+}
+
+.zeus-sticker .content .link {
+  font-size: 12px;
+  color: #b6babf;
+}
+.zeus-sticker .content .tag {
+  display: inline;
+}
+
+.zeus-filter {
+  background: rgba(208, 233, 245, 0.30);
+  box-shadow: 1px 1px 8px #e8e8e8;
+}

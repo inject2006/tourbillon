@@ -1,0 +1,17 @@
+<script id="{{id}}_tmpl" type="x-tmpl-mustache">
+  {{=<% %>=}}
+    {{#data}}
+    <tr>
+  <%={{ }}=%>
+
+      {{#table_columns}}
+        {{=<% %>=}}
+        <td>{{<%={{ }}=%>{{.}}{{=<% %>=}}}}</td>
+        <%={{ }}=%>
+      {{/table_columns}}
+
+ {{=<% %>=}}
+    </tr>
+    {{/data}}
+  <%={{ }}=%>
+</script>

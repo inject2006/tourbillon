@@ -1,0 +1,5 @@
+{{#income_expense_detail_table}}
+
+  {{> ../../_layout/page.mst}}
+
+{{/income_expense_detail_table}}

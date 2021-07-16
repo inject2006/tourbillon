@@ -1,0 +1,38 @@
+<canvas id="{{id}}"></canvas>
+<script>
+
+$(document).ready(function(){
+
+  function fillData(params) {
+    DataService.get({
+      url: '{{& api_url}}',
+      data: params
+    },function(resp){
+
+      var data = resp['data'];
+      var options = resp['options'] || {};
+
+      if (resp['time']) {
+        data = ChartUtil.fillDate(data, resp['time']);
+      }
+
+      var fill = ('{{fill}}' === 'true');
+      data = ChartUtil.fillColors(data ,{fill:fill}, '{{type}}');
+      var ctx = document.getElementById('{{id}}');
+      var chart = new Chart(ctx, {
+          // The type of chart we want to create
+          type: '{{type}}',
+
+          // The data for our dataset
+          data: data,
+
+          // Configuration options go here
+          options: options
+      });
+    })
+  }
+
+  fillData();
+  DataListener.addDataFunction("{{id}}",fillData);
+});
+</script>

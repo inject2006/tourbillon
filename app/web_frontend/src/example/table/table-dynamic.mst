@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+  {{> ../../_partials/header.mst}}
+</head >
+
+<body class="nav-md" >
+<div class="container body" >
+  <div class="main_container" >
+    <div class="col-md-3 left_col" >
+      <div class="left_col scroll-view" >
+
+        <!-- menu profile quick info -->
+        {{> ../../_partials/menu-header.mst}}
+        <!-- /menu profile quick info -->
+
+        <br />
+
+        <!-- sidebar menu -->
+        {{> ../../_partials/menu.mst}}
+        <!-- /sidebar menu -->
+
+        <!-- /menu footer buttons -->
+        {{> ../../_partials/menu-footer.mst}}
+        <!-- /menu footer buttons -->
+      </div >
+    </div >
+
+    <!-- top navigation -->
+    {{> ../../_partials/navigation.mst}}
+    <!-- /top navigation -->
+
+    <!-- page content -->
+    <div class="right_col" role="main" >
+      <div class="" >
+        <div class="page-title" >
+          <div class="title_left" >
+            <h3 >Dynamic Table-自定义构建</h3 >
+          </div >
+
+          <div class="title_right" >
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search" >
+              <div class="input-group" >
+                <input type="text" class="form-control" placeholder="Search for..." >
+                <span class="input-group-btn" >
+                      <button class="btn btn-default" type="button" >Go!</button >
+                    </span >
+              </div >
+            </div >
+          </div >
+        </div >
+        <div class="clearfix" ></div >
+        <div class="row" >
+          <div class="col-md-12 col-sm-12 col-xs-12" >
+            {{#table_dynamic}}
+            {{> components/table-cp.mst}}
+            {{/table_dynamic}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /page content -->
+
+    <!-- footer content -->
+    {{> ../../_partials/footer.mst}}
+    <!-- /footer content -->
+  </div >
+</div >
+{{> ../../_partials/body-js.mst}}
+<script>
+  $(document).ready(function(){
+    $('#dynamic').DataTable();
+  });
+</script>
+</body >
+</html >

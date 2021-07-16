@@ -1,0 +1,61 @@
+<html lang="en" class="gr__colorlib_com"><head>
+    {{> ../../_partials/header.mst}}
+</style>
+</head>
+
+  <body class="login" data-gr-c-s-loaded="true">
+    <div>
+      <div class="login_wrapper">
+        <div id="register" class="animate form ">
+          <section class="login_content">
+            <form id="register_form">
+              <h1>创建账户</h1>
+              {{#modules.register.data}}
+              <div>
+                <input type="{{type}}" name="{{name}}" class="form-control" placeholder="{{placeholder}}" required>
+              </div>
+              {{/modules.register.data}}
+              <div>
+                <a class="btn btn-info btn-block submit" href="{{& modules.register.register_url}}" id="register_btn">注册</a>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+                <p class="change_link">您已注册 ?
+                  <a href="{{& modules.login.page}}" class="to_register"> 登录 </a>
+                </p>
+
+                <div class="clearfix"></div>
+                <br>
+
+                <div>
+                  {{#site}}
+                  <h1><i class="zeus-logo"></i>{{name}}</h1>
+                  <p>{{copyright}}</p>
+                  {{/site}}
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+    <script>
+    var login_button_id = '#register_btn';
+    var loginData = DataUtil.getFormData('register_form');
+    $(login_button_id).click(function(){
+      DataService.post({
+        url: '{{& modules.register.api_url}}',
+        data: DataUtil.getFormData('register_form')
+      },function(resp){
+        window.location = '{{& modules.login.page}}';
+      },function(error){
+        alert(error.responseJSON.msg);
+      });
+    })
+
+    $("#register_form").submit(function(e){e.preventDefault();});
+    </script>
+  </body>
+  </html>

@@ -1,0 +1,43 @@
+<script>
+(function(window){
+  var authEnable = 'true' === 'true';
+
+  if (authEnable) {
+    var authObject = AuthService.getAuth();
+    var token = authObject.token;
+    var expired = authObject.expired;
+    var loginPage = '/_modules/account/login.html';
+    var registerPage = '/_modules/account/register.html';
+    var currentPage = window.location.pathname;
+    //新用户
+    if (!token || !expired) {
+      // 如果不是登录或者注册页面
+      if (! (currentPage === loginPage ||
+          currentPage === registerPage) ) {
+        window.location = loginPage
+      }
+    //老用户
+    } else {
+      //如果权限没有过期
+      if ((new Date().getTime()) < Number(expired)) {
+        DataService.get({
+         url: '/misc/verify/' + token
+       },function(resp){
+         if (!resp.authorized) {
+           window.location = '/_modules/account/login.html'
+         } else {
+
+         }
+       })
+      //如果权限过期
+      } else {
+        if (! (currentPage === loginPage ||
+            currentPage === registerPage) ) {
+          window.location = loginPage
+        }
+      }
+    }
+  }
+})(window)
+
+</script>

@@ -1,0 +1,30 @@
+<div class="col-md-{{width}} col-sm-6 col-xs-12">
+  <div class="tile-stats">
+    <div class="icon"><i class="fa fa-{{icon}}"></i>
+    </div>
+    <div class="count" id="{{id}}"></div>
+    <h3>{{title}}</h3>
+    <p>{{desp}}</p>
+  </div>
+</div>
+<script>
+  (function(window){
+    function fillData(params) {
+      DataService.get({
+        url: '{{& api_url}}',
+        data: params
+      },function(resp){
+        document.getElementById('{{id}}').innerHTML = resp.data.count;
+      });
+    }
+
+    fillData();
+
+    $(document).ready(function(){
+      DataListener.addDataFunction("{{id}}",fillData);
+    })
+
+  })(window)
+
+
+</script>

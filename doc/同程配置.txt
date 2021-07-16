@@ -1,0 +1,16 @@
+http://访问地址//询价 http://ota.tourbillon.qisec.cn:9001/ota/search?__name=tongcheng&__token=5e7ba8bddd7b9648
+http://访问地址//验价 http://ota.tourbillon.qisec.cn:9001/ota/verify?__name=tongcheng&__token=5e7ba8bddd7b9648
+http://访问地址//下单 http://ota.tourbillon.qisec.cn:9001/ota/order?__name=tongcheng&__token=5e7ba8bddd7b9648
+userName :  shyy123（需确认询价和订单下载的 userName 是否同一个）
+password :  yida1680
+测试Key : 1234567890123456
+生产key : 5251465585477985
+白名单 IP地址（用来查下订单列表，订单详情，票号回填） :139.219.12.184  139.219.13.125 42.159.91.248
+
+
+
+询价 http://ota.tourbillon.qisec.cn:9001/ota/search?__name=lvmama&__token=8a69427239d7039f
+验价 http://ota.tourbillon.qisec.cn:9001/ota/verify?__name=lvmama&__token=8a69427239d7039f
+下单 http://ota.tourbillon.qisec.cn:9001/ota/order?__name=lvmama&__token=8a69427239d7039f
+通知扣款 http://ota.tourbillon.qisec.cn:9001/ota/notice_pay?__name=lvmama&__token=8a69427239d7039f
+订单查询（包括获取票号） http://ota.tourbillon.qisec.cn:9001/ota/order_detail?__name=lvmama&__token=8a69427239d7039f

@@ -1,0 +1,336 @@
+ <style>
+ .text-with-hr {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+/*
+横线，并通过z-index：-1将or附近的横线遮盖住
+*/
+.text-with-hr:before {
+    position: absolute;
+    content: '';
+    top: 25px;
+    left: 0px;
+    width: 100%;
+    border-bottom: 1px solid #003300;
+    z-index: -1;
+}
+.text-with-hr span {
+    display: inline-block;
+    background: white;
+    padding: 10px;
+    font-size:18px;
+}
+
+#operation-product-type {
+    width: 300px;
+}
+
+#segments {
+    width: 1000px;
+}
+
+#routing-key {
+    width: 300px;
+}
+
+ </style>
+
+<form id="manual-order-form" class="form-horizontal form-label-left" action="/flight_order_manage/" method='POST'>
+      <div class="text-with-hr">
+         <span>订单基本信息</span>
+     </div>
+      <p class="bg-info">1. 价格单位为元<br />2.如果儿童票价位0代表无儿童票<br />3.部分国际票无折扣字段，默认显示为10.0折
+     </p>
+     <div class="form-inline form-group">
+         <div class="form-group">
+              <label ">RoutingKey：</label>
+                <input id="routing-key" type="input" name="routing_key" class="form-control"  data-type="input" readonly >
+         </div>
+         <div class="form-group">
+              <label ">供应商：</label>
+                <input id="provider" type="input" name="provider" class="form-control"  data-type="input" readonly >
+         </div>
+         <div class="form-group">
+              <label ">渠道：</label>
+                <input id="provider-channel" type="input" name="provider_channel" class="form-control"  data-type="input"  readonly >
+         </div>
+         <div class="form-group">
+              <label ">产品描述：</label>
+                <input id="operation-product-type" type="input" name="operation_product_type" class="form-control"  data-type="input"  readonly >
+         </div>
+     </div>
+     <div class="form-inline form-group">
+
+         <div class="form-group">
+              <label ">国际/国内：</label>
+                <input id="routing-range" type="input" name="routing_range" class="form-control"  data-type="input"  readonly >
+         </div>
+         <div class="form-group">
+              <label ">单程/返程：</label>
+                <input id="trip-type" type="input" name="trip_type" class="form-control"  data-type="input"  readonly >
+         </div>
+     </div>
+
+     <div class="form-inline form-group">
+         <div class="form-group">
+              <label ">去程日期：</label>
+                <input id="from-date" type="input" name="from_date" class="form-control"  data-type="input"  readonly >
+         </div>
+         <div class="form-group">
+              <label ">回程日期：</label>
+                <input id="ret-date" type="input" name="ret_date" class="form-control"  data-type="input"  readonly >
+         </div>
+         <div class="form-group">
+              <label ">出发机场：</label>
+                <input id="from-airport-str" type="input" name="from_airport_str" class="form-control"  data-type="input"  readonly >
+         </div>
+         <div class="form-group">
+              <label ">到达机场：</label>
+                <input id="to-airport-str" type="input" name="to_airport_str" class="form-control"  data-type="input"  readonly >
+         </div>
+     </div>
+
+     <div class="form-inline form-group">
+          <label ">航段详情：</label>
+            <input id="segments" type="input" name="segments" class="form-control"  data-type="input"  readonly >
+     </div>
+
+
+      <div class="form-inline form-group">
+         <div class="form-group">
+              <label ">成人单价：</label>
+                <input id="adult-price" type="input" name="adult_price" class="form-control"  data-type="input"  readonly >
+         </div>
+         <div class="form-group">
+              <label ">成人折扣：</label>
+                <input id="adult-price-discount" type="input" name="adult_price_discount" class="form-control"  data-type="input"  readonly >
+         </div>
+         <div class="form-group">
+              <label ">成人税：</label>
+                <input id="adult-tax" type="input" name="adult_tax" class="form-control"  data-type="input"  readonly >
+         </div>
+         <div class="form-group">
+              <label ">儿童单价：</label>
+                <input id="child-price" type="input" name="child_price" class="form-control"  data-type="input"  readonly >
+         </div>
+         <div class="form-group">
+              <label ">儿童税：</label>
+                <input id="child-tax" type="input" name="child_tax" class="form-control"  data-type="input"  readonly >
+         </div>
+     </div>
+
+     <div class="text-with-hr">
+         <span>乘机人信息</span>
+     </div>
+     <p class="bg-info">1.英文名字请使用/分割，Ex：LastName/FirstName<br />2.部分供应商产品乘机人联系电话将固定为某运营电话，请注意
+     <br />3.生日、证件过期时间格式为 1990-04-09
+     <br />4.如果填写身份证，则不需要填写生日和证件过期时间，系统会根据生日或者身份证号判断成人或儿童（12岁以下判断为儿童）
+     </p>
+
+    <input id="pax-count" type="hidden" name="pax_count"  data-type="input" value="1"  >
+    <input id="from-airport" type="hidden" name="from_airport"  data-type="input"  >
+    <input id="to-airport" type="hidden" name="to_airport"  data-type="input"   >
+     <input id="routing-json" type="hidden" name="routing_json"  data-type="input"   >
+    <div id="pax-group" class="form-group">
+     <div class="form-inline form-group">
+         <div class="form-group">
+              <label ">姓名：</label>
+                <input id="" type="input" name="pax_name_1" style="width:auto" class="form-control"  data-type="input"  >
+
+         </div>
+         <div class="form-group">
+              <label ">性别：</label>
+                <select name="pax_gender_1" class="form-control"  >
+                <option value="M">男</option>
+                <option value="F">女</option>
+                </select>
+         </div>
+         <div class="form-group">
+              <label ">证件类别：</label>
+            <select name="pax_card_type_1" class="form-control"  >
+                <option value="NI">身份证</option>
+                <option value="PP">护照</option>
+                </select>
+         </div>
+         <div class="form-group">
+              <label ">证件号：</label>
+                <input id="" type="input" name="pax_card_no_1" class="form-control"  data-type="input"  >
+         </div>
+         <div class="form-group">
+              <label ">生日：</label>
+                <input id="" type="input" name="pax_birthdate_1" class="form-control"  data-type="input"  >
+         </div>
+         <div class="form-group">
+              <label ">证件号过期时间：</label>
+                <input id="" type="input" name="pax_card_expired_1" class="form-control"  data-type="input"  >
+         </div>
+         <div class="form-group">
+              <label ">联系电话：</label>
+                <input id="" type="input" name="pax_mobile_1" class="form-control"  data-type="input"  >
+         </div>
+         <a class="btn btn-danger removepax" href="#" role="button">删除</a>
+     </div>
+     </div>
+     <a id="addPax" class="btn btn-success" href="#" role="button">新增乘机人</a>
+
+     <div class="text-with-hr">
+         <span>联系人信息</span>
+     </div>
+     <p class="bg-info">1.部分供应商产品联系电话将固定为某运营电话，请注意</p>
+         <div class="form-inline form-group">
+             <div class="form-group">
+                  <label ">姓名：</label>
+                    <input id="" type="input" name="contact_name" style="width:auto" class="form-control"  data-type="input" value="胡建辉"  >
+
+             </div>
+             <div class="form-group">
+                  <label ">联系电话：</label>
+                    <input id="" type="input" name="contact_mobile" class="form-control"  data-type="input" value="18858007278"  >
+             </div>
+             <div class="form-group">
+                  <label ">邮箱（选填）：</label>
+                    <input id="" type="input" name="contact_email" class="form-control"  data-type="input" value="honuo@qq.com"  >
+             </div>
+         </div>
+     <div class="text-with-hr">
+         <span>补充信息</span>
+     </div>
+     <div class="form-group">
+          <label ">备注：</label>
+            <textarea id="" name="comment" class="form-control" rows="5" ></textarea>
+     </div>
+  <div class="ln_solid"></div>
+  <div class="form-group pull-right">
+
+      <id  class="btn btn-primary" id="manual-order-submit" >创建订单</id>
+
+  </div>
+</form>
+
+    <script>
+        //初始参数个数
+        var varCount = 1;
+
+        $(function () {
+          //新增按钮点击
+            $('#addPax').on('click', function(){
+                varCount++;
+                $node =  '   <div class="form-inline form-group">'
+         +'<div class="form-group">'
+              +'<label ">姓名：</label>'
+              +'  <input id="" type="input" name="pax_name_'+varCount+'" class="form-control"  data-type="input"  >'
+        +' </div>'
+        +' <div class="form-group">'
+        +'      <label ">性别：</label>'
+        +'        <select name="pax_gender_'+varCount+'" class="form-control"  >'
+        +'        <option value="M">男</option>'
+        +'        <option value="F">女</option>'
+        +'        </select>'
+        +' </div>'
+        +' <div class="form-group">'
+        +'      <label ">证件类别：</label>'
+        +'    <select name="pax_card_type_'+varCount+'" class="form-control"  >'
+        +'        <option value="NI">身份证</option>'
+        +'        <option value="PP">护照</option>'
+        +'        </select>'
+        +' </div>'
+        +' <div class="form-group">'
+        +'      <label ">证件号：</label>'
+         +'       <input id="" type="input" name="pax_card_no_'+varCount+'" class="form-control"  data-type="input"  >'
+        +' </div>'
+        +' <div class="form-group">'
+         +'     <label ">生日：</label>'
+        +'        <input id="" type="input" name="pax_birthdate_'+varCount+'" class="form-control"  data-type="input"  >'
+        +' </div>'
+         +'<div class="form-group">'
+         +'     <label ">证件号过期时间：</label>'
+         +'       <input id="" type="input" name="pax_card_expired_'+varCount+'" class="form-control"  data-type="input"  >'
+        +' </div>'
+         +' <div class="form-group">'
+         +'      <label ">联系电话：</label>'
+         +'        <input id="" type="input" name="pax_mobile_'+varCount+'" class="form-control"  data-type="input"  >'
+         +' </div>'
+        +' <button  class="btn btn-danger removepax">删除</button>'
+     +'</div>';
+            //新表单项添加到“新增”按钮前面
+                $('#pax-group').after($node);
+                $('#pax-count').val(varCount);
+            });
+
+          //删除按钮点击
+          $('form').on('click', '.removepax', function(){
+            $(this).parent().remove();
+            varCount--;
+            $('#pax-count').val(varCount);
+          });
+        });
+
+    function GetRequest() {
+
+       var url = location.search; //获取url中"?"符后的字串
+
+       var theRequest = new Object();
+
+       if (url.indexOf("?") != -1) {
+
+          var str = url.substr(1);
+
+          strs = str.split("&");
+
+          for(var i = 0; i < strs.length; i ++) {
+
+             theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1]);
+
+          }
+
+       }
+
+       return theRequest;
+
+    }
+    Request = GetRequest();
+    $('#routing-key').val(Request["routing_key"]);
+    $('#provider').val(Request["provider"]);
+    $('#provider-channel').val(decodeURI(Request["provider_channel"]));
+    $('#operation-product-type').val(decodeURI(Request["operation_product_type"]));
+    $('#routing-range').val(Request["routing_range"]);
+    $('#trip-type').val(Request["trip_type"]);
+    $('#from-date').val(Request["from_date"]);
+    $('#ret-date').val(Request["ret_date"]);
+    $('#from-airport-str').val(decodeURI(Request["from_airport_str"]));
+    $('#to-airport-str').val(decodeURI(Request["to_airport_str"]));
+    $('#from-airport').val(Request["from_airport"]);
+    $('#to-airport').val(Request["to_airport"]);
+    $('#segments').val(decodeURI(Request["segments"]));
+    $('#adult-price').val(Request["adult_price"]);
+    $('#adult-tax').val(Request["adult_tax"]);
+    $('#child-price').val(Request["child_price"]);
+    $('#child-tax').val(Request["child_tax"]);
+    $('#adult-price-discount').val(decodeURI(Request["adult_price_discount"]));
+    $('#routing-json').val(Request["routing_json"]);
+
+    var submit_id = '#manual-order-submit';
+    $(submit_id).click(function(){
+      var form_data = DataUtil.getFormData("manual-order-form");
+      DataService.post({
+        url: '/misc/flight_order_manage/',
+        data: form_data
+      },function(resp){
+        new PNotify({
+            title: '订票成功!',
+            type: 'success'
+        });
+        alert('订票成功，订单ID:'+resp.flight_order_id);
+        window.location.href ="/example/table/flight-order-table.html";
+      },function(error){
+        new PNotify({
+            title: '订票失败!',
+            text: error.responseText,
+            type: 'error'
+        });
+      })
+    });
+
+    </script>

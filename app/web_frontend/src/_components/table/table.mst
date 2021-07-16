@@ -1,0 +1,8 @@
+{{#editor}}
+  {{> tmpl-mustache.mst}}
+  {{> table-editor.mst}}
+{{/editor}}
+{{#general}}
+  {{> tmpl-mustache.mst}}
+  {{> table-general.mst}}
+{{/general}}

@@ -1,0 +1,3 @@
+{{#table_hover}}
+  {{> table-cp.mst}}
+{{/table_hover}}

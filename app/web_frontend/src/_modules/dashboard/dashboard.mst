@@ -1,0 +1,3 @@
+{{#modules.dashboard}}
+{{> ../../_layout/page.mst}}
+{{/modules.dashboard}}

@@ -1,0 +1,61 @@
+<script id="_tmpl" type="x-tmpl-mustache">
+  {{#data}}
+  <div class="widget_summary">
+    <div class="w_left w_25">
+      <span>{{label}}</span>
+    </div>
+    <div class="w_center w_55">
+      <div class="progress">
+        <div class="progress-bar bg-green" role="progressbar" style="width: {{percent}}%;">
+        </div>
+      </div>
+    </div>
+    <div class="w_right w_20">
+      <span>{{value}}</span>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  {{/data}}
+</script>
+<!-- <div class="progress">
+  <div class="progress-bar" role="progressbar" data-transitiongoal="75"></div>
+</div> -->
+<div id=''></div>
+
+<script>
+(function(window){
+  var templateElement  = document.getElementById('_tmpl');
+  var containerElement = document.getElementById('');
+
+  var progressTemplate = $(templateElement).html();
+  var container = $(containerElement);
+
+  Mustache.parse(progressTemplate);
+
+  function fillData(params){
+    DataService.get({
+      url: '',
+      data: params
+    },function(resp){
+      var max = 0;
+      var data = resp.data.rank;
+      var dispData = [];
+      for(var i=0;i<&&i<data.length;i++) {
+        var item = data[i];
+        max = (max>item.value)?max:item.value;
+        item.percent = item.value / max * 100;
+        dispData.push(item);
+      }
+      var rendered = Mustache.render(progressTemplate, {data:data});
+
+      container.html(rendered);
+    });
+  }
+
+  $(document).ready(function(){
+    fillData();
+    DataListener.addDataFunction("",fillData);
+  });
+
+})(window)
+</script>

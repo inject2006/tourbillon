@@ -1,0 +1,47 @@
+version: "2"
+
+services:
+  alipay_qcode:
+    image: 139.219.133.175:5000/tourbillon:v1.2.4
+    container_name: alipay_qcode
+    environment:
+      env_mode: prod_devhub
+      HOSTNAME: tb-devhub
+    volumes:
+      - /data/project/tourbillon:/projects/tourbillon
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t alipay_qcode alipay_qcode
+
+  provider_session_manager:
+    image: 139.219.133.175:5000/tourbillon:v1.2.4
+    container_name: provider_session_manager
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-misc
+    volumes:
+      - $PWD:/projects/tourbillon
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t provider_session_manager provider_session_manager
+
+#  sms_pool:
+#    image: 139.219.133.175:5000/tourbillon:v1.2.2
+#    container_name: sms_pool
+#    environment:
+#      env_mode: prod_devhub
+#      HOSTNAME: tb-devhub
+#    volumes:
+#      - /data/project/tourbillon:/projects/tourbillon
+#      - /etc/localtime:/etc/localtime:ro
+#      - /etc/resolv.conf:/etc/resolv.conf
+#    restart: always
+#    privileged: true
+#    working_dir: /projects/tourbillon
+#    command: python run.py -t sms_pool sms_pool

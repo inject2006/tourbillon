@@ -1,0 +1,22 @@
+<ul class="nav nav-tabs bar_tabs" role="tablist">
+  {{#pages}}
+  <li role="presentation" ><a href="#tab-{{title}}"  role="tab" data-toggle="tab" >{{title}}</a>
+  </li>
+  {{/pages}}
+</ul>
+<div class="tab-content">
+  {{#pages}}
+  <div role="tabpanel" class="tab-pane fade " id='tab-{{title}}'>
+    <script>
+      var page = '{{& page}}';
+      $.get({
+        url: window.location.protocol + "//" + window.location.host + page
+      }).done(function(htmlPage){
+        var converter = new showdown.Converter();
+        var rendered = converter.makeHtml(htmlPage)
+        $('#tab-{{title}}').html(rendered);
+      });
+    </script>
+  </div>
+  {{/pages}}
+</div>

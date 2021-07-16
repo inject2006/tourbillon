@@ -1,0 +1,61 @@
+<div class="col-md- tile">
+  <div class="tile-stats" style="padding:10px;" id="">
+    <span></span>
+    <h2></h2>
+    <span class="sparkline" style="height: 200px;" >
+      加载中...
+    </span>
+  </div>
+</div>
+<script>
+
+(function(window){
+  function draw(params) {
+    DataService.get({
+      url: '',
+      data: params
+    },function(resp){
+      if (resp && resp.data && resp.data.datasets) {
+        var datasets = resp.data.datasets;
+        if (datasets && datasets.length >= 1) {
+          datasets.forEach(function(set,index){
+            var values = set.data;
+            var element = document.getElementById('');
+            var je = $(element);
+            var boxWidth = je.innerWidth() - 40;
+            var barWidth = boxWidth / values.length;
+            var total = 0;
+            values.forEach(function(value){
+              total+=value;
+            });
+
+            je.children('h2').html(total);
+            je.children('.sparkline').sparkline(values,{
+              type: '' || 'line',
+              barWidth: String(barWidth),
+              composite: index >= 1,
+              width: '100%',
+              fillColor: 'rgba(113, 151, 191, 0.27)',
+              height: '60'
+            });
+          })
+        }
+      }
+    });
+  }
+
+  var dynamic = '' === 'true'?true:false;
+
+  if (dynamic) {
+    draw();
+    window.setInterval(draw,)
+  } else {
+    draw();
+  }
+
+  $(document).ready(function(){
+    DataListener.addDataFunction("", draw);
+  });
+
+})(window);
+</script>

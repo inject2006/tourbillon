@@ -1,0 +1,13 @@
+<div class="form-group">
+  <label class="col-md-3 col-sm-3 col-xs-12 control-label">
+    <br>
+    <small class="text-navy">{{desp}}</small>
+  </label>
+  <div class="col-md-9 col-sm-9 col-xs-12">
+    <div class="{{type}}">
+      <label>
+        <input type="{{type}}" value="{{value}}" name="{{name}}"  data-type="{{type}}"> {{label}}
+      </label>
+    </div>
+  </div>
+</div>

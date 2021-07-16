@@ -1,0 +1,55 @@
+{
+  "name": "Zeus",
+  "version": "1.0.0",
+  "description": "Zeus",
+  "main": "index.js",
+  "scripts": {
+    "start": "gulp",
+    "build": "gulp build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@gitlab.bigsec.net:8999/frontend/generator-admin.git"
+  },
+  "keywords": [],
+  "author": "bigsec",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^7.1.1",
+    "babel-core": "^6.25.0",
+    "babel-preset-env": "^1.5.2",
+    "babelify": "^7.3.0",
+    "browser-sync": "^2.18.12",
+    "browserify": "^14.4.0",
+    "del": "^3.0.0",
+    "express": "^4.15.3",
+    "glob": "^7.1.2",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-merge-json": "^1.0.0",
+    "gulp-mustache": "^2.3.0",
+    "gulp-postcss": "^7.0.0",
+    "gulp-sass": "^3.1.0",
+    "mustache": "^2.3.0",
+    "postcss-sprites": "^4.2.1",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "autosize": "^3.0.21",
+    "bootstrap": "^3.3.7",
+    "bootstrap-daterangepicker": "^2.1.25",
+    "devbridge-autocomplete": "^1.4.1",
+    "font-awesome": "^4.7.0",
+    "gentelella": "1.3.0",
+    "icheck": "^1.0.2",
+    "jQuery-Tags-Input": "git+https://github.com/xoxco/jQuery-Tags-Input.git",
+    "jquery": "^2.2.3",
+    "moment": "^2.18.1",
+    "node-sass": "^4.7.2",
+    "parsleyjs": "^2.7.2",
+    "pnotify": "^3.2.0",
+    "select2": "^4.0.3",
+    "showdown": "^1.7.1",
+    "switchery": "git+https://github.com/abpetkov/switchery.git"
+  }
+}

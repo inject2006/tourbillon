@@ -1,0 +1,14 @@
+{{#modules}}
+  {{#config.include}}
+  <li><a href="/_modules/dashboard/dashboard.html"><i class="fa fa-bullseye" ></i> 总 览</a>
+  </li>
+  <li><a><i class="fa fa-cog" ></i> 配 置 <span class="fa fa-chevron-down" ></span ></a>
+    <ul class="nav child_menu" >
+      <li ><a href="/_modules/config/config.html" >基础配置</a ></li>
+      {{#extends}}
+      <li ><a href="{{link}}" >{{name}}</a ></li>
+      {{/extends}}
+    </ul>
+  </li>
+  {{/config.include}}
+{{/modules}}

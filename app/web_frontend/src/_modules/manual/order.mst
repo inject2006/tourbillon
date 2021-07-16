@@ -1,0 +1,3 @@
+{{#modules.manual}}
+{{> ../../_layout/page.mst}}
+{{/modules.manual}}

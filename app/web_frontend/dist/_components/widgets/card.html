@@ -1,0 +1,30 @@
+<div class="col-md- col-sm-6 col-xs-12">
+  <div class="tile-stats">
+    <div class="icon"><i class="fa fa-"></i>
+    </div>
+    <div class="count" id=""></div>
+    <h3></h3>
+    <p></p>
+  </div>
+</div>
+<script>
+  (function(window){
+    function fillData(params) {
+      DataService.get({
+        url: '',
+        data: params
+      },function(resp){
+        document.getElementById('').innerHTML = resp.data.count;
+      });
+    }
+
+    fillData();
+
+    $(document).ready(function(){
+      DataListener.addDataFunction("",fillData);
+    })
+
+  })(window)
+
+
+</script>

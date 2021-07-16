@@ -1,0 +1,10 @@
+{
+  "site": {
+    "name": "Tourbillon",
+    "title": "Tourbillon - 陀飞轮机票管理系统",
+    "copyright": "©2018 All Rights Reserved."
+  },
+  "server": {
+    "host": "http://misc.tourbillon.qisec.cn:9801"
+  }
+}

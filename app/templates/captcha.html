@@ -1,0 +1,62 @@
+{% extends "base.html"  %}
+{% block page_content %}
+
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <a id="notice"></a>
+        <input class="form-control" id="cap" type="text" placeholder="输入验证码..." value=""/>
+        <img id="vcode" src="" onclick="updatecode()" width="100" height="30"/>
+        <p hidden id="id" value=""></p>
+        <input class="btn btn-default" id="submit" type="button" onclick="verifycode()" value="提交"/>
+    </div>
+
+</div>
+
+
+
+<script>
+    updatecode()
+    function submit(t){
+            a = document.getElementById('cap').value
+            console.log(a)
+        };
+
+    function updatecode(){
+        $.getJSON('/hippo/captcha/getcode',null,function(data){
+                code = JSON.parse(data.code);
+                id = JSON.parse(data.id);
+                document.getElementById('id').value=id
+                document.getElementById('vcode').src=code
+                
+            })
+    };
+
+    function verifycode(){
+        ipt = document.getElementById('cap').value
+        cid = document.getElementById('id').value
+
+        $.getJSON('/hippo/captcha/verifycode',{
+                ipt: JSON.stringify(ipt),
+                cid:JSON.stringify(cid)
+            },function(data){
+                console.log(data)
+                if(data.ret=='ok'){
+                    document.getElementById('notice').innerHTML='验证通过'
+                    window.location = getURLParam('from')+'?token='+cid
+                }
+            }).fail(function(data){
+                updatecode();
+                document.getElementById('notice').innerHTML='验证码输入错误，请重新输入'
+            })
+    }
+
+    function getURLParam(name){
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); 
+        var r = window.location.search.substr(1).match(reg); 
+        if (r != null) return unescape(r[2]); return null; 
+    }
+
+</script>
+{% endblock %}

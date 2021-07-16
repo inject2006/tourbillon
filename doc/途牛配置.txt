@@ -1,0 +1,7 @@
+密钥：A64K9GE72VBY8NUD
+cid：tuniu_
+询价： http://ota.tourbillon.qisec.cn:9001/ota/search?__name=tuniu&__token=pks67r30gvjod5a8
+验价： http://ota.tourbillon.qisec.cn:9001/ota/verify?__name=tuniu&__token=pks67r30gvjod5a8
+下单： http://ota.tourbillon.qisec.cn:9001/ota/order?__name=tuniu&__token=pks67r30gvjod5a8
+通知出票、支付取消接口： http://ota.tourbillon.qisec.cn:9001/ota/notice_issue?__name=tuniu&__token=pks67r30gvjod5a8
+票号查询接口： http://ota.tourbillon.qisec.cn:9001/ota/order_detail?__name=tuniu&__token=pks67r30gvjod5a8

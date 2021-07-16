@@ -1,0 +1,5 @@
+{{#manual_search_flight_table}}
+
+  {{> ../../_layout/page.mst}}
+
+{{/manual_search_flight_table}}

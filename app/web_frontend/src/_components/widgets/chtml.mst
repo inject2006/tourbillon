@@ -1,0 +1,12 @@
+<div  id='tab-{{title}}'>
+<script>
+  var page = '{{& page}}';
+  $.get({
+    url: window.location.protocol + "//" + window.location.host + page
+  }).done(function(htmlPage){
+    var converter = new showdown.Converter();
+    $('#tab-{{title}}').html(htmlPage);
+  });
+</script>
+</div>
+

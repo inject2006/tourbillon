@@ -1,0 +1,290 @@
+<table id="{{id}}" class="ui celled table {{type}} display nowrap" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      {{#table_detail_info.length}}
+      <th class="details-control"></th>
+      {{/table_detail_info.length}}
+      {{#table_headers}}
+      <th>{{.}}</th>
+      {{/table_headers}}
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      {{#table_detail_info.length}}
+      <th></th>
+      {{/table_detail_info.length}}
+      {{#table_headers}}
+      <th>{{.}}</th>
+      {{/table_headers}}
+    </tr>
+  </tfoot>
+
+</table>
+<script>
+  (function(window){
+    var tableBodyTemplate = $('#{{id}}_tmpl').html();
+    Mustache.parse(tableBodyTemplate);
+
+    function getPropertyType(fields,name) {
+        var type = '';
+        fields.forEach(function(item, key){
+          if (item.name === name) {
+            type =  item.type
+          }
+        })
+        return type;
+    }
+
+    $(document).ready(function(){
+      var editFields = [
+        {{#table_edit}}
+        {
+          label: '{{label}}',
+          name: '{{name}}',
+          type: '{{type}}',
+          format: '{{format}}' || 'YYYY-MM-DD HH:mm'
+        },
+        {{/table_edit}}
+        {}
+      ];
+      editFields.pop();
+
+      var createFields = [
+        {{#table_create}}
+        {
+          label: '{{label}}',
+          name: '{{name}}',
+          type: '{{type}}',
+          format: '{{format}}' || 'YYYY-MM-DD HH:mm'
+        },
+        {{/table_create}}
+        {}
+      ];
+      createFields.pop();
+
+      var tableColumns = [
+        {{#table_detail_info.length}}
+        {
+          className: 'details-control',
+          orderable: false,
+          data: null,
+          defaultContent: ''
+        },
+        {{/table_detail_info.length}}
+        {{#table_columns}}
+        {
+          data: '{{.}}',
+          render: function(data, type, row) {
+            if (typeof data === 'number' && String(data).length === 13) {
+              return moment(data).format('YYYY-MM-DD HH:mm')
+            } else if (data instanceof Array) {
+              var strArray = [];
+              data.forEach(function(o) {
+                 strArray.push(o.label);
+              })
+              return strArray.join(',');
+            } else {
+              return data;
+            }
+          }
+        },
+        {{/table_columns}}
+        {}
+      ];
+      tableColumns.pop();
+
+      var editor = new $.fn.dataTable.Editor({
+        ajax: {
+          edit: {
+            type: "PUT",
+            url: DataService.getHost() + '{{& api_url}}/_id_',
+            contentType: 'application/json',
+            headers: {'Zeus-Token': localStorage['zeus_token']},
+            data: function(data) {
+              var content = data['data'];
+              return JSON.stringify(content);
+            },
+            error: function(error) {
+              new PNotify({
+                title: error.responseText || '修改失败!',
+                text: error.statusText,
+                type: 'error'
+              });
+            }
+          },
+          remove: {
+            type: "DELETE",
+            url: DataService.getHost() + '{{& api_url}}/_id_',
+            contentType: 'application/json',
+            headers: {'Zeus-Token': localStorage['zeus_token']},
+            data: function(data) {
+              var content = data['data'];
+              var params = DataListener.getGlobalParams();
+              params.json = JSON.stringify(content);
+              return params;
+            },
+            error: function(error) {
+              new PNotify({
+                title: error.responseText || '删除失败!',
+                text: error.statusText,
+                type: 'error'
+              });
+            }
+          }
+        },
+        table: "#{{id}}",
+        fields: editFields,
+        idSrc: 'id'
+      });
+
+      var createEditor = new $.fn.dataTable.Editor({
+        ajax: {
+          create: {
+            type: "POST",
+            url: DataService.getHost() + '{{& api_url}}/',
+            headers: {'Zeus-Token': localStorage['zeus_token']},
+            contentType: 'application/json',
+            data: function(data) {
+              var content = data['data'];
+              var formData = content[0];
+              for(var key in formData) {
+                var type = getPropertyType(editFields,key);
+                if (type === 'datetime') {
+                  content[0][key] = new Date(formData[key]).getTime();
+                }
+              }
+              return JSON.stringify(content);
+            },
+            error: function(error) {
+              new PNotify({
+                title: error.responseText || '创建失败!',
+                text: error.statusText,
+                type: 'error'
+              });
+            }
+          }
+        },
+        table: "#{{id}}",
+        fields: createFields,
+        idSrc: 'id'
+      });
+
+      var apiURL = DataService.getHost() + '{{& api_url}}/';
+
+      var buttons = [
+        { extend: "create", editor: createEditor },
+        { extend: "edit",   editor: editor },
+        { extend: "remove", editor: editor }
+      ];
+
+      {{#select_action}}
+        buttons.push({
+          extend: 'selected',
+          text: '{{text}}',
+          action: function(e,dt) {
+            var ids = dt.rows({ selected: true })[0];
+            var dataAll = dt.data().splice(0);
+
+            var data = {};
+
+            dataAll.forEach(function(item){
+              if(ids.indexOf(Number(item.id)) >= 0) {
+                data[item.id] = item;
+              }
+            });
+            DataService.post({
+              url: '{{& url}}',
+              data: data
+            },function(resp){
+              if(resp.status == 200){
+                alert(resp.msg);
+              } else {
+                alert("请求失败");
+              }
+            },function(error){
+              alert("请求失败");
+            });
+          }
+        });
+      {{/select_action}}
+
+      {{#ex_buttons}}
+        buttons.push("{{.}}");
+      {{/ex_buttons}}
+
+      var dt = $('#{{id}}').DataTable({
+        dom: 'Bfrtip',
+        ajax: {
+          url: apiURL,
+          beforeSend: function(request) {
+            request.setRequestHeader("Zeus-Token",localStorage['zeus_token']);
+          }
+        },
+        columns: tableColumns,
+        select: true,
+        scrollX: true,
+        pageLength: {{page_length}},
+        buttons: buttons,
+        {{#table_detail_info.length}}
+        order: [[1, 'asc']]
+        {{/table_detail_info.length}}
+      });
+
+      function generateUrl() {
+        var paramsURL = apiURL + "?" + $.param(DataListener.getGlobalParams());
+        dt.ajax.url(paramsURL)
+        dt.ajax.reload();
+      }
+
+      createEditor.on('submitSuccess', function(e, type){
+        generateUrl();
+      });
+
+      createEditor.on('preSubmit', function(e, type){
+        createEditor.s.ajax.create.url = DataService.getHost() + '{{& api_url}}/?' + $.param(DataListener.getGlobalParams());
+      });
+
+      editor.on('submitSuccess', function(e, type){
+        generateUrl();
+      });
+
+      editor.on('preSubmit', function(e, type){
+        editor.s.ajax.edit.url = DataService.getHost() + '{{& api_url}}/_id_?' + $.param(DataListener.getGlobalParams());
+      });
+
+      DataListener.addDataFunction("{{id}}",generateUrl);
+
+      function showDetail(data) {
+        return (
+          '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+          {{#table_detail_info}}
+            '<tr>'+
+                '<td>{{title}}:</td>'+
+                '<td>'+data.{{value}}+'</td>'+
+            '</tr>'+
+          {{/table_detail_info}}
+          '</table>'
+        );
+      }
+
+      $('#{{id}} tbody').on('click', 'td.details-control', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var tr = $(this).closest('tr');
+        var row = dt.row( tr );
+
+        if ( row.child.isShown() ) {
+          // This row is already open - close it
+          row.child.hide();
+          tr.removeClass('shown');
+        }
+        else {
+          // Open this row
+          row.child(showDetail(row.data())).show();
+          tr.addClass('shown');
+        }
+      });
+    });
+  })(window)
+</script>

@@ -1,0 +1,68 @@
+{
+    "manual_order_form": {
+    "page": {
+      "title": "人工订票",
+      "subtitle": "。"
+    },
+    "components": [
+      {
+        "title":"表单",
+        "subtitle": "。",
+        "width": "8",
+        "form": {
+          "id": "manual_order_form",
+          "direction": "horizontal",
+          "api_url": "/misc/manual_order/",
+          "data": [
+            {
+              "input":{
+                "name": "name",
+                "label": "名字"
+              }
+            },
+            {
+              "select":{
+                "name": "gender.value",
+                "label": "性别"
+              }
+            }
+
+          ],
+          "options": {"gender":[
+          {
+            "value": "M",
+            "label": "男"
+          }]
+      }
+        }
+      }
+    ]
+  },
+  "layout_form": {
+    "page": {
+      "title": "运营配置管理",
+      "subtitle": ""
+    },
+    "components": [
+      {
+        "title":"Manage",
+        "subtitle": "",
+        "width": "12",
+        "form": {
+          "id": "example_form",
+          "direction": "horizontal",
+          "api_url": "/misc/sys_control/",
+          "data": [
+            {
+              "input":{
+                "name": "operation_config",
+                "label": "当前配置"
+              }
+            }
+
+          ]
+        }
+      }
+    ]
+  }
+}

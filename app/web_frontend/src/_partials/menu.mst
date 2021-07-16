@@ -1,0 +1,21 @@
+
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+  <div class="menu_section">
+    <h3 >导航菜单</h3>
+    <ul class="nav side-menu">
+      {{> menu-modules.mst}}
+      {{#menu}}
+        <li><a><i class="fa fa-{{icon}}" ></i> {{name}} <span class="fa fa-chevron-down" ></span ></a>
+          <ul class="nav child_menu" >
+            {{#pages}}
+            <li ><a href="{{link}}" >{{name}}</a ></li>
+            {{/pages}}
+          </ul>
+        </li>
+      {{/menu}}
+      {{#modules.help.include}}
+        <li><a href="/_modules/help/help.html"><i class="fa fa-question-circle-o" ></i> 帮 助</a></li>
+      {{/modules.help.include}}
+    </ul >
+  </div >
+</div >

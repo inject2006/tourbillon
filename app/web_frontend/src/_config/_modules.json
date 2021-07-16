@@ -1,0 +1,16 @@
+{
+  "modules": {
+    "config": {
+      "include": false,
+      "extends": [
+        {
+          "name":"高级配置",
+          "link":"/modules-ext/config/config-advanced.html"
+        }
+      ]
+    },
+    "help": {
+      "include": false
+    }
+  }
+}

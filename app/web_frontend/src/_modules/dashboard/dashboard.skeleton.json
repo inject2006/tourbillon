@@ -1,0 +1,13 @@
+{
+  "modules": {
+    "dashboard": {
+      "page": {
+        "title": "总览",
+        "subtitle": ""
+      },
+      "components": [
+
+      ]
+    }
+  }
+}

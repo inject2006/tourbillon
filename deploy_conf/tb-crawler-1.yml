@@ -1,0 +1,77 @@
+version: "2"
+
+services:
+  flight_crawl_task:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: flight_crawl_task
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-crawler-1
+    volumes:
+      - $PWD:/projects/tourbillon
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t flight_crawl_task flight_crawl_task 3 50
+
+  flight_ota_fare_task:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: flight_ota_fare_task
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-crawler-1
+    volumes:
+    - $PWD:/projects/tourbillon
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t flight_ota_fare_task flight_ota_fare_task 10 10
+
+  dynamic_fare_task:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: dynamic_fare_task
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-crawler-1
+    volumes:
+    - $PWD:/projects/tourbillon
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t dynamic_fare_task dynamic_fare_task 1 3
+
+  fare_comparison_task:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: fare_comparison_task
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-crawler-1
+    volumes:
+    - $PWD:/projects/tourbillon
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t fare_comparison_task fare_comparison_task 1 3
+
+  scheduled_airline_crawl_task:
+    image: 139.219.133.175:5000/tourbillon:v1.2.7
+    container_name: scheduled_airline_crawl_task
+    environment:
+      env_mode: prod
+      HOSTNAME: tb-crawler-1
+    volumes:
+    - $PWD:/projects/tourbillon
+    - /etc/localtime:/etc/localtime:ro
+    - /etc/resolv.conf:/etc/resolv.conf
+    restart: always
+    privileged: true
+    working_dir: /projects/tourbillon
+    command: python run.py -t scheduled_airline_crawl_task scheduled_airline_crawl_task 5 40

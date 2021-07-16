@@ -1,0 +1,19 @@
+<div class="form-group">
+  <label class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+  <div class="col-md-9 col-sm-12">
+    <input type="text" name="" class="form-control" data-type="date" data-format="">
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    $('input[name=]').daterangepicker({
+      singleDatePicker: true,
+      showDropdowns: true,
+      timePicker: true,
+      timePickerIncrement: 30,
+      locale: {
+        format: '' || 'YYYY-MM-DD HH:mm'
+      }
+    })
+  });
+</script>

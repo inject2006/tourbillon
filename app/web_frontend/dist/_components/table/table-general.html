@@ -1,0 +1,29 @@
+<table id="" class="table  ">
+  <thead>
+    <tr>
+    </tr>
+  </thead>
+  <tbody id="_body">
+  </tbody>
+</table>
+<script>
+  (function(window){
+    var tableBodyTemplate = $('#_tmpl').html();
+    var tableType = '';
+
+    Mustache.parse(tableBodyTemplate);
+    $(document).ready(function(){
+      function fillData(params){
+        DataService.get({
+          url: '',
+          data: params
+        },function(data){
+          var rendered = Mustache.render(tableBodyTemplate,data);
+          $('#_body').html(rendered);
+        });
+      }
+      fillData();
+      DataListener.addDataFunction("",fillData);
+    });
+  })(window)
+</script>

@@ -1,0 +1,3 @@
+{{#table_bordered}}
+  {{> table-cp.mst}}
+{{/table_bordered}}

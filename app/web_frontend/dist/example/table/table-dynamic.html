@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" >
+<!-- Meta, title, CSS, favicons, etc. -->
+<meta charset="utf-8" >
+<meta http-equiv="X-UA-Compatible" content="IE=edge" >
+<meta name="viewport" content="width=device-width, initial-scale=1" >
+<title >Tourbillon - 陀飞轮机票管理系统</title >
+
+<script>
+    window.zeusServerHost = 'http://misc.tourbillon.qisec.cn:9801';  
+</script>
+<!-- jQuery -->
+<script src="/vendors/gentelella/jquery.js" ></script>
+<script src="/vendors/js/data-service.js" ></script>
+<script src="/vendors/js/auth-service.js" ></script>
+<script src="/vendors/js/data-util.js" ></script>
+<script src="/vendors/js/chart-util.js" ></script>
+<script src="/vendors/js/mustache.min.js" ></script>
+<script src="/vendors/gentelella/Chart.min.js" ></script>
+<script src="/vendors/js/jquery.sparkline.min.js" ></script>
+<script src="/vendors/js/palette.js" ></script>
+<script src="/vendors/js/data-listener.js" ></script>
+<!-- Bootstrap -->
+<link href="/vendors/gentelella/bootstrap.min.css" rel="stylesheet" >
+<!-- Font Awesome -->
+<link href="/vendors/font-awesome/font-awesome.min.css" rel="stylesheet" >
+<!-- iCheck -->
+<link href="/vendors/gentelella/flat/green.css" rel="stylesheet" >
+<!-- Select2 -->
+<link href="/vendors/gentelella/select2.min.css" rel="stylesheet" >
+<!-- Switchery -->
+<link href="/vendors/gentelella/switchery.css" rel="stylesheet" >
+<!-- bootstrap-daterangepicker -->
+<link href="/vendors/gentelella/daterangepicker.css" rel="stylesheet" >
+<link href="/vendors/gentelella/jquery.tagsinput.min.css" rel="stylesheet" >
+<link href="/vendors/pnotify.css" rel="stylesheet" >
+<link href="/vendors/pnotify.buttons.css" rel="stylesheet" >
+<link href="/vendors/pnotify.nonblock.css" rel="stylesheet" >
+<!-- gentelella -->
+<link href="/vendors/gentelella/custom.min.css" rel="stylesheet" >
+<!-- Datatables Editor -->
+<link href="/vendors/dataTables.editor/jquery.dataTables.min.css" rel="stylesheet" >
+<link href="/vendors/dataTables.editor/editor.dataTables.min.css" rel="stylesheet" >
+<link href="/vendors/dataTables.editor/buttons.dataTables.min.css" rel="stylesheet" >
+<link href="/vendors/dataTables.editor/select.dataTables.min.css" rel="stylesheet" >
+
+<link href="/vendors/style/zeus.css" rel="stylesheet" >
+<script>
+(function(window){
+  var authEnable = 'true' === 'true';
+
+  if (authEnable) {
+    var authObject = AuthService.getAuth();
+    var token = authObject.token;
+    var expired = authObject.expired;
+    var loginPage = '/_modules/account/login.html';
+    var registerPage = '/_modules/account/register.html';
+    var currentPage = window.location.pathname;
+    //新用户
+    if (!token || !expired) {
+      // 如果不是登录或者注册页面
+      if (! (currentPage === loginPage ||
+          currentPage === registerPage) ) {
+        window.location = loginPage
+      }
+    //老用户
+    } else {
+      //如果权限没有过期
+      if ((new Date().getTime()) < Number(expired)) {
+        DataService.get({
+         url: '/misc/verify/' + token
+       },function(resp){
+         if (!resp.authorized) {
+           window.location = '/_modules/account/login.html'
+         } else {
+
+         }
+       })
+      //如果权限过期
+      } else {
+        if (! (currentPage === loginPage ||
+            currentPage === registerPage) ) {
+          window.location = loginPage
+        }
+      }
+    }
+  }
+})(window)
+
+</script>
+</head >
+
+<body class="nav-md" >
+<div class="container body" >
+  <div class="main_container" >
+    <div class="col-md-3 left_col" >
+      <div class="left_col scroll-view" >
+
+        <!-- menu profile quick info -->
+<div class="navbar nav_title" style="border: 0;" >
+  <a href="index.html" class="site_title" ><i class="zeus-logo" ></i > <span >Tourbillon</span ></a >
+</div >
+
+<div class="clearfix" ></div >
+
+<div class="profile clearfix" >
+  <div class="profile_pic" >
+    <!-- <img src="images/img.jpg" alt="..." class="img-circle profile_img" > -->
+  </div >
+  <div class="profile_info" >
+  
+  </div >
+</div >
+        <!-- /menu profile quick info -->
+
+        <br />
+
+        <!-- sidebar menu -->
+
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+  <div class="menu_section">
+    <h3 >导航菜单</h3>
+    <ul class="nav side-menu">
+        <li><a><i class="fa fa-table" ></i> 订单管理 <span class="fa fa-chevron-down" ></span ></a>
+          <ul class="nav child_menu" >
+            <li ><a href="&#x2F;example&#x2F;table&#x2F;flight-order-table.html" >主订单列表</a ></li>
+            <li ><a href="&#x2F;example&#x2F;table&#x2F;sub-order-table.html" >子订单列表</a ></li>
+            <li ><a href="&#x2F;example&#x2F;table&#x2F;manual-search-flight-table.html" >机票搜索</a ></li>
+            <li ><a href="&#x2F;example&#x2F;table&#x2F;income-expense-detail-table.html" >收支明细</a ></li>
+          </ul>
+        </li>
+        <li><a><i class="fa fa-table" ></i> 系统配置 <span class="fa fa-chevron-down" ></span ></a>
+          <ul class="nav child_menu" >
+            <li ><a href="&#x2F;example&#x2F;form&#x2F;layout-form.html" >系统配置</a ></li>
+            <li ><a href="&#x2F;_modules&#x2F;syscontrol&#x2F;syscontrol.html" >New系统配置</a ></li>
+            <li ><a href="&#x2F;example&#x2F;table&#x2F;fusing-repo-table.html" >熔断黑名单</a ></li>
+          </ul>
+        </li>
+    </ul >
+  </div >
+</div >
+        <!-- /sidebar menu -->
+
+        <!-- /menu footer buttons -->
+<!-- <div class="sidebar-footer hidden-small" >
+  <a data-toggle="tooltip" data-placement="top" title="Settings" >
+    <span class="glyphicon glyphicon-cog" aria-hidden="true" ></span >
+  </a >
+  <a data-toggle="tooltip" data-placement="top" title="FullScreen" >
+    <span class="glyphicon glyphicon-fullscreen" aria-hidden="true" ></span >
+  </a >
+  <a data-toggle="tooltip" data-placement="top"  >
+    <span class="glyphicon glyphicon-eye-close" aria-hidden="true" ></span >
+  </a >
+  <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html" >
+    <span class="glyphicon glyphicon-off" aria-hidden="true" ></span >
+  </a >
+</div > -->
+        <!-- /menu footer buttons -->
+      </div >
+    </div >
+
+    <!-- top navigation -->
+<div class="top_nav" >
+  <div class="nav_menu" >
+    <nav >
+      <div class="nav toggle" >
+        <a id="menu_toggle" ><i class="fa fa-bars" ></i ></a >
+      </div >
+
+      <ul class="nav navbar-nav navbar-right" >
+        <li class="" >
+          <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <span id="nav-username"></span>
+            <span class=" fa fa-angle-down" ></span >
+          </a >
+          <ul class="dropdown-menu dropdown-usermenu pull-right" >
+            <li ><a href="javascript:AuthService.logout();" ><i class="fa fa-sign-out pull-right" ></i > 登 出</a ></li >
+          </ul >
+        </li >
+
+
+      </ul >
+    </nav >
+  </div >
+</div >
+<script>
+  (function(window){
+    var username = localStorage['zeus_username'];
+    document.getElementById('nav-username').innerHTML = username;
+  })(window)
+</script>
+    <!-- /top navigation -->
+
+    <!-- page content -->
+    <div class="right_col" role="main" >
+      <div class="" >
+        <div class="page-title" >
+          <div class="title_left" >
+            <h3 >Dynamic Table-自定义构建</h3 >
+          </div >
+
+          <div class="title_right" >
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search" >
+              <div class="input-group" >
+                <input type="text" class="form-control" placeholder="Search for..." >
+                <span class="input-group-btn" >
+                      <button class="btn btn-default" type="button" >Go!</button >
+                    </span >
+              </div >
+            </div >
+          </div >
+        </div >
+        <div class="clearfix" ></div >
+        <div class="row" >
+          <div class="col-md-12 col-sm-12 col-xs-12" >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /page content -->
+
+    <!-- footer content -->
+<footer >
+  <div class="pull-right" >
+    Template by <a href="#" > 网罗游游 </a >
+  </div >
+  <div class="clearfix" ></div >
+</footer >
+    <!-- /footer content -->
+  </div >
+</div >
+<script src="/vendors/js/dom-helper.js" ></script>
+<!-- Bootstrap -->
+<script src="/vendors/gentelella/bootstrap.js" ></script>
+<!-- iCheck -->
+<script src="/vendors/gentelella/icheck.min.js" ></script>
+<!-- bootstrap-daterangepicker -->
+<script src="/vendors/gentelella/moment.min.js" ></script>
+<script src="/vendors/gentelella/daterangepicker.js" ></script>
+<!-- jQuery Tags Input -->
+<script src="/vendors/gentelella/jquery.tagsinput.js" ></script>
+<!-- Switchery -->
+<script src="/vendors/gentelella/switchery.min.js" ></script>
+<!-- Select2 -->
+<script src="/vendors/gentelella/select2.full.min.js" ></script>
+<!-- Parsley -->
+<script src="/vendors/gentelella/parsley.min.js" ></script>
+<!-- Autosize -->
+<script src="/vendors/gentelella/autosize.min.js" ></script>
+<!-- jQuery autocomplete -->
+<script src="/vendors/gentelella/jquery.autocomplete.min.js" ></script>
+<!-- Data Table Scripts -->
+<script src="/vendors/gentelella/jquery.dataTables.min.js" ></script>
+<!-- Data Table Ediotr Scripts -->
+<!-- <script src="/vendors/dataTables.editor/dataTables.editor.min.js"></script> -->
+<script src="/vendors/dataTables.editor/dataTables.editor.js"></script>
+<!-- Data Table Ediotr Scripts -->
+<script src="/vendors/dataTables.editor/dataTables.buttons.min.js"></script>
+<!-- Data Table Ediotr Style Scripts -->
+<script src="/vendors/dataTables.editor/dataTables.select.min.js"></script>
+<!-- progress bar -->
+<script src="/vendors/gentelella/bootstrap-progressbar.min.js"></script>
+<!-- Custom Theme Scripts -->
+<script src="/vendors/gentelella/custom.min.js" ></script>
+<!-- Markdown Scripts -->
+<script src="/vendors/showdown.min.js" ></script>
+<!-- Notify Scripts -->
+<script src="/vendors/pnotify.js" ></script>
+<script src="/vendors/pnotify.buttons.js" ></script>
+<script src="/vendors/pnotify.nonblock.js" ></script>
+<script src="/vendors/js/zeus.js" ></script>
+<script>
+  $(document).ready(function(){
+    $('#dynamic').DataTable();
+  });
+</script>
+</body >
+</html >

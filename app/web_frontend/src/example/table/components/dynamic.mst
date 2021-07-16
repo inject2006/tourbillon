@@ -1,0 +1,3 @@
+{{#table_dynamic}}
+  {{> table-cp.mst}}
+{{/table_dynamic}}

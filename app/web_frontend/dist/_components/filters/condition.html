@@ -1,0 +1,69 @@
+<div class="col-md-12 col-xs-12" data-domtype="filter">
+  <div class="x_panel zeus-filter">
+    <div class="x_title">
+      <h2>
+        <small></small>
+      </h2>
+      <div class="clearfix"></div>
+    </div>
+      <div class="x_content">
+        <form class="form-horizontal form-label-left" id="">
+          <div class="form-group">
+            <div class="col-md-1 col-xs-12 col-md-offset-11">
+              <button type="button" class="btn btn-success" id="_refresh"></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+<script>
+$(document).ready(function(){
+  $("#_refresh").click(function(){
+    var params =  DataUtil.getFormData("");
+    DataListener.setGlobalParams(params);
+    DataListener.execDataFunction(null,params);
+  });
+
+  $("#").submit(function(e){e.preventDefault();});
+
+  var url = '';
+  function fetchData() {
+    DataService.get({
+      url: url
+    },function(resp){
+      if(resp.data){
+        for(var key in resp.data){
+          var input = $("#")[0][key];
+          if(input.type === "checkbox") {
+            input.checked = resp.data[key];
+          } else if(input.dataset && input.dataset.type === "date"){
+            input.value = moment(resp.data[key]).format(input.dataset.format);
+          } else {
+            if(resp.options && input.dataset && input.dataset.type === "select"){
+              var optionStr = '';
+              resp.options[key].forEach(function(item){
+                optionStr += ('<option value="' + item.value + '">' + item.label + '</option>')
+              });
+              $(input).html(optionStr);
+            }
+            input.value = resp.data[key];
+          }
+        }
+
+        $("#_refresh").click();
+      }
+    },function(error){
+      new PNotify({
+        title: error.responseText || '初始化失败!',
+        text: error.statusText,
+        type: 'error'
+      });
+    });
+  }
+
+  if(url) {
+    fetchData();
+  }
+})
+</script>

@@ -1,0 +1,88 @@
+{
+  "modules_ext": {
+    "config": {
+        "page": {
+          "title": "基础配置",
+          "subtitle": ""
+        },
+        "components": [
+        {
+            "title":"高级表单",
+            "subtitle": "",
+            "width": "6",
+            "form": {
+              "id": "example_form_1",
+              "direction": "horizontal",
+              "api_url": "/data/example_form_ext",
+              "data": [
+                {
+                  "input":{
+                    "name": "username",
+                    "label": "用户名",
+                    "type": "text"
+                  }
+                },
+                {
+                  "input":{
+                    "label": "邮箱",
+                    "name": "email",
+                    "type": "email"
+                  }
+                },
+                {
+                  "input":{
+                    "label": "密码",
+                    "name": "pwd",
+                    "type": "password"
+                  }
+                },
+                {
+                  "switch": {
+                    "label": "是否记住",
+                    "name": "remember",
+                    "type": "checkbox"
+                  }
+                },
+                {
+                  "switch": {
+                    "label": "男",
+                    "name": "gender",
+                    "type": "radio",
+                    "value": "m"
+                  }
+                },
+                {
+                  "switch": {
+                    "label": "女",
+                    "name": "gender",
+                    "type": "radio",
+                    "value": "f"
+                  }
+                },
+                {
+                  "select": {
+                    "label": "国家",
+                    "name": "country",
+                    "options": [
+                      {
+                        "value": "cn",
+                        "name":  "中国"
+                      },
+                      {
+                        "value": "us",
+                        "name":  "美国"
+                      },
+                      {
+                        "value": "jp",
+                        "name":  "日本"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+    }
+  }
+}

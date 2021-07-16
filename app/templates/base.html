@@ -1,0 +1,36 @@
+{% extends "bootstrap/base.html"  %}
+
+{% block title %}Challenge{% endblock %}
+
+{% block navbar %}
+<div class="navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ops.... u may look like a robot</a>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- Load c3.css -->
+<link href="/hippo/captcha/static/c3js/c3.css" rel="stylesheet">
+
+<!-- Load d3.js and c3.js -->
+<script src="/hippo/captcha/static/c3js/d3.v3.min.js" charset="utf-8"></script>
+<script src="/hippo/captcha/static/c3js/c3.min.js"></script>
+<script src="/hippo/captcha/static/c3js/jquery.min.js"></script>
+<script src="/hippo/captcha/static/echarts.min.js"></script>
+<div class="panel-heading" style="padding-top: 100px;">
+  {% block page_content %}
+
+  {% endblock%}
+</div>
+{% endblock %}
